@@ -27,5 +27,6 @@ typedef struct s_stack
 int	main(int argc, char **argv);
 int	check_dup(int argc, char **argv);
 int	check_num(const char *str);
+int	stack_lstsize(t_stack *lst);
 
 #endif
