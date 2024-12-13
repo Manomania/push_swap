@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	ft_push(t_stack **stack_dest, t_stack **stack_src)
+static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
 {
 	t_stack *temp;
 
