@@ -12,12 +12,6 @@
 
 #include "push_swap.h"
 
-/**
- * @brief Norm a string by removing the "+" sign
- * @param str The string to norm
- * @return str to norm the string
- */
-
 static char	*normalize(char *str)
 {
 	if (str[0] == '+')
@@ -31,7 +25,6 @@ static char	*normalize(char *str)
  * @param char **argv is the argument to compare
  * @return int 0 if duplicates are found, 1 otherwise
  */
-
 int	check_dup(int argc, char **argv)
 {
 	int		i;
@@ -61,7 +54,6 @@ int	check_dup(int argc, char **argv)
  * @param str The string to validate.
  * @return int 1 if the string do not contain only digits, 0 otherwise.
  */
-
 int	check_num(const char *str)
 {
 	int	i;

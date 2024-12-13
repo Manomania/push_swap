@@ -31,11 +31,13 @@ int	check_dup(int argc, char **argv);
 int	ft_sa(t_stack **stack_a);
 int	ft_sb(t_stack **stack_b);
 int	ft_ss(t_stack **stack_a, t_stack **stack_b);
+int	ft_pa(t_stack **stack_a, t_stack **stack_b);
+int	ft_pb(t_stack **stack_a, t_stack **stack_b);
 int	ft_ra(t_stack **stack_a);
 int	ft_rb(t_stack **stack_b);
 int	ft_rr(t_stack **stack_a, t_stack **stack_b);
-int	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 int	ft_rrb(t_stack **stack_b);
 int	ft_rra(t_stack **stack_a);
+int	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
 #endif

@@ -24,6 +24,13 @@ static int	ft_swap(t_stack **stack)
 	return (0);
 }
 
+/**
+ * @brief	Performs the "sa" operation on a given stack.
+ *			The operation swap the firsts 2 elements of the stack.
+ * @param	stack_a: A pointer to the t_stack on which the operation is performed.
+ *			The stack must be valid and contain at least 2 elements.
+ * @return	0 if the operation is successful, -1 otherwise.
+ */
 int	ft_sa(t_stack **stack_a)
 {
 	if (ft_swap(stack_a) == -1)
@@ -32,6 +39,13 @@ int	ft_sa(t_stack **stack_a)
 	return (0);
 }
 
+/**
+ * @brief	Performs the "sb" operation on a given stack
+*			The operation swap the firsts 2 elements of the stack.
+ * @param	stack_b: A pointer to the t_stack on which the operation is performed.
+ *			The stack must be valid and contain at least 2 elements.
+ * @return	0 if the operation is successful, -1 otherwise.
+ */
 int	ft_sb(t_stack **stack_b)
 {
 	if (ft_swap(stack_b) == -1)
@@ -40,6 +54,15 @@ int	ft_sb(t_stack **stack_b)
 	return (0);
 }
 
+/**
+ * @brief	Performs the "ss" operation on two stacks
+ *  *		The operation swap the firsts 2 elements of the two stack.
+ * @param	stack_a: A pointer to the t_stack on which the operation is performed.
+ *			The stack must be valid and contain at least 2 elements.
+ * @param	stack_b: A pointer to the t_stack on which the operation is performed.
+ *			The stack must be valid and contain at least 2 elements.
+ * @return	0 if the operation is successful, -1 otherwise.
+ */
 int	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	if (stack_lstsize(*stack_a) < 2 || stack_lstsize(*stack_b) < 2)

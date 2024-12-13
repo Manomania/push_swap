@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief	Count the size of a linked list representng a stack.
+ * @param	lst A pointer to the first node of the stack.
+ * @return	i the length of elements in the stack.
+ */
 int	stack_lstsize(t_stack *lst)
 {
 	int	i;
