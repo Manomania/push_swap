@@ -29,3 +29,36 @@ int	stack_lstsize(t_stack *lst)
 	}
 	return (i);
 }
+
+t_stack	*stack_lstnew(int value)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->value = value;
+	new->next = NULL;
+	return (new);
+}
+
+t_stack	*stack_lstlast(t_stack *lst)
+{
+	if (lst)
+	{
+		while (lst->next)
+			lst = lst->next;
+	}
+	return (lst);
+}
+
+void	stack_lstadd_back(t_stack **lst, t_stack *new)
+{
+	if (lst)
+	{
+		if (*lst == NULL)
+			*lst = new;
+		else
+			stack_lstlast(*lst)->next = new;
+	}
+}

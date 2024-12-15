@@ -21,8 +21,8 @@ static char	*normalize(char *str)
 
 /**
  * @brief Check for duplicate arguments with the function norm
- * @param int argc is the number of arguments
- * @param char **argv is the argument to compare
+ * @param argc is the number of arguments
+ * @param argv is the argument to compare
  * @return int 0 if duplicates are found, 1 otherwise
  */
 int	check_dup(int argc, char **argv)
