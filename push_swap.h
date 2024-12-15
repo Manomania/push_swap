@@ -28,6 +28,9 @@ int main(int argc, char **argv);
 int	stack_lstsize(t_stack *lst);
 int	check_num(const char *str);
 int	check_dup(int argc, char **argv);
+t_stack	*stack_lstnew(int value);
+t_stack	*stack_lstlast(t_stack *lst);
+void	stack_lstadd_back(t_stack **lst, t_stack *new);
 int	ft_sa(t_stack **stack_a);
 int	ft_sb(t_stack **stack_b);
 int	ft_ss(t_stack **stack_a, t_stack **stack_b);
@@ -39,14 +42,10 @@ int	ft_rr(t_stack **stack_a, t_stack **stack_b);
 int	ft_rrb(t_stack **stack_b);
 int	ft_rra(t_stack **stack_a);
 int	ft_rrr(t_stack **stack_a, t_stack **stack_b);
-int	find_max_digit(t_stack **stack);
-void	radix_sort(t_stack **stack);
-void	stack_lstadd_back(t_stack **lst, t_stack *new);
-t_stack	*stack_lstlast(t_stack *lst);
-t_stack	*stack_lstnew(int value);
-void	init_buckets(t_stack *bucket[10]);
-void	init_index(t_stack *stack);
-int	f_max_dig(int value, int index);
-int	f_max_val(t_stack *stack);
+void	handle_swap(t_stack **stack_a, t_stack **stack_b);
+void	handle_push(t_stack **stack_a, t_stack **stack_b);
+void	handle_rotate(t_stack **stack_a, t_stack **stack_b);
+void	handle_rev_rotate(t_stack **stack_a, t_stack **stack_b);
+
 
 #endif

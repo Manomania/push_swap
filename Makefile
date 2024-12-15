@@ -5,15 +5,20 @@
 NAME				=	push_swap
 HEADER				=	push_swap.h
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Wextra -Werror
+CFLAGS 				= 	-Wall -Wextra -Werror -g
 AR					=	ar rcs
 RM					=	rm -f
 
 SRC_F				=	main \
 						check_args \
 						chained_list \
-						radix \
-						utils_radix
+						rev_rotate \
+						swap \
+						rotate \
+						push \
+						handle_operations \
+						algo
+
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))

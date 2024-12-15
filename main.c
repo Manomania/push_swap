@@ -12,28 +12,6 @@
 
 #include "push_swap.h"
 
-void free_list(t_stack *list)
-{
-	t_stack *temp;
-
-	while (list)
-	{
-		temp = list;
-		list = list->next;
-		free(temp);
-	}
-}
-
-void print_list(t_stack *list)
-{
-	while (list)
-	{
-		printf("%d -> ", list->value);
-		list = list->next;
-	}
-	printf("NULL\n");
-}
-
 t_stack *args_to_list(int argc, char **argv)
 {
 	t_stack *stack = NULL;
@@ -48,9 +26,34 @@ t_stack *args_to_list(int argc, char **argv)
 	return (stack);
 }
 
+void	free_stack(t_stack **stack)
+{
+	t_stack	*temp;
+
+	while (*stack)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
+	*stack = NULL;
+}
+
+void print_list(t_stack *list)
+{
+	while (list)
+	{
+		printf("%d -> ", list->value);
+		list = list->next;
+	}
+	printf("NULL\n");
+}
+
 int main(int argc, char **argv)
 {
-	t_stack *stack;
+	t_stack *stack_a = NULL;
+	// t_stack *stack_b = NULL;
+
 	int i;
 
 	i = 1;
@@ -64,21 +67,15 @@ int main(int argc, char **argv)
 		if (!check_num(argv[i]))
 		{
 			printf("\033[91mError: Bad argument\033[039m\n");
-			return (1);
+			return (free_stack(&stack_a), 1);
 		}
 		else if (!check_dup(argc, argv))
 		{
 			printf("\033[91mError: Duplicates\033[039m\n");
-			return (1);
+			return (free_stack(&stack_a), 1);
 		}
 		i++;
 	}
-	stack = args_to_list(argc, argv);
-	radix_sort(&stack);
-	printf("\033[92mSorted List: \033[039m\n");
-	print_list(stack);
-
-	free_list(stack);
 	printf("\033[92mALL GOOD !!!!\033[039m\n");
 	return (0);
 }
