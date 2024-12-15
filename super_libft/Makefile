@@ -81,7 +81,7 @@ all:					$(NAME)
 $(NAME):				$(OBJ)
 							@echo "$(YELLOW)[$(NAME)]:$(DEF_COLOR)"
 							@$(AR) $@ $^
-							@echo "$(GREEN)=> Success!$(DEF_COLOR)"
+							@echo "$(GREEN)=> Success!\n$(DEF_COLOR)"
 
 $(OBJ_DIR):
 							@mkdir -p $(OBJ_DIR)

@@ -10,7 +10,10 @@ AR					=	ar rcs
 RM					=	rm -f
 
 SRC_F				=	main \
-						check_args
+						check_args \
+						chained_list \
+						radix \
+						utils_radix
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))
@@ -37,12 +40,20 @@ LIBFT				=	$(LIBFT_DIR)libft.a
 all:					$(LIBFT) $(NAME)
 
 clean:
+								@echo "$(RED)[$(OBJ_DIR)]:$(DEF_COLOR)"
 								@rm -rf $(OBJ_DIR)
-								@$(MAKE) -C $(LIBFT_DIR) clean
+								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+								@echo "$(RED)[$(LIBFT_DIR)$(OBJ_DIR)]:$(DEF_COLOR)"
+								@$(MAKE) --silent -C $(LIBFT_DIR) clean
+								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
 
 fclean: 				clean
+								@echo "$(RED)[$(NAME)]:$(DEF_COLOR)"
 								@$(RM) $(NAME)
-								@$(MAKE) -C $(LIBFT_DIR) fclean
+								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+								@echo "$(RED)[$(LIBFT)]:$(DEF_COLOR)"
+								@$(MAKE) --silent -C $(LIBFT_DIR) fclean
+								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
 
 re: 					fclean all
 
@@ -55,10 +66,10 @@ re: 					fclean all
 $(NAME):				$(LIBFT) $(OBJ)
 							@echo "$(YELLOW)[$(NAME)]:$(DEF_COLOR)"
 							@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
-							@echo "$(GREEN)=> Success!$(DEF_COLOR)"
+							@echo "$(GREEN)=> Success!\n$(DEF_COLOR)"
 
 $(LIBFT):
-							@$(MAKE) -C $(LIBFT_DIR)
+							@$(MAKE) --silent -C $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o: 			$(SRC_DIR)%.c $(HEADER)
 							@mkdir -p $(OBJ_DIR)
