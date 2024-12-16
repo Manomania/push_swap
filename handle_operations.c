@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief
+ * @param
+ * @param
+ * @return
+ */
 void	handle_swap(t_stack **stack_a, t_stack **stack_b)
 {
 	if (*stack_a && (*stack_a)->next && *stack_b && (*stack_b)->next
@@ -26,6 +32,12 @@ void	handle_swap(t_stack **stack_a, t_stack **stack_b)
 		ft_sb(stack_b);
 }
 
+/**
+ * @brief
+ * @param
+ * @param
+ * @return
+ */
 void	handle_push(t_stack **stack_a, t_stack **stack_b)
 {
 	if (*stack_a && *stack_b)
@@ -37,6 +49,12 @@ void	handle_push(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+/**
+ * @brief
+ * @param
+ * @param
+ * @return
+ */
 void	handle_rotate(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*last_value_a;
@@ -55,6 +73,12 @@ void	handle_rotate(t_stack **stack_a, t_stack **stack_b)
 		ft_rb(stack_b);
 }
 
+/**
+ * @brief
+ * @param
+ * @param
+ * @return
+ */
 void	handle_rev_rotate(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*last_value_a;

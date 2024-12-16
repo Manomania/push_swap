@@ -52,7 +52,8 @@ void print_list(t_stack *list)
 int main(int argc, char **argv)
 {
 	t_stack *stack_a = NULL;
-	// t_stack *stack_b = NULL;
+	t_stack *stack_b = NULL;
+	// t_stack	*temp = NULL;
 
 	int i;
 
@@ -69,13 +70,31 @@ int main(int argc, char **argv)
 			printf("\033[91mError: Bad argument\033[039m\n");
 			return (free_stack(&stack_a), 1);
 		}
-		else if (!check_dup(argc, argv))
+		if (!check_dup(argc, argv))
 		{
 			printf("\033[91mError: Duplicates\033[039m\n");
 			return (free_stack(&stack_a), 1);
 		}
 		i++;
 	}
-	printf("\033[92mALL GOOD !!!!\033[039m\n");
+	stack_a = args_to_list(argc, argv);
+	if (stack_is_sorted(stack_a))
+		return (free_stack(&stack_a), 0);
+	if (argc <= 5)
+	{
+
+	}
+	if (argc > 5)
+	{
+		push_min_to_b(&stack_a, &stack_b);
+		push_all_to_a(&stack_a, &stack_b);
+		free_stack(&stack_a);
+		free_stack(&stack_b);
+	}
+	free_stack(&stack_a);
+	free_stack(&stack_b);
+	// printf("Final stack\n");
+	// print_list(stack_a);
+	// print_list(stack_b);
 	return (0);
 }

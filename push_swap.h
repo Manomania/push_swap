@@ -47,5 +47,14 @@ void	handle_push(t_stack **stack_a, t_stack **stack_b);
 void	handle_rotate(t_stack **stack_a, t_stack **stack_b);
 void	handle_rev_rotate(t_stack **stack_a, t_stack **stack_b);
 
+int	find_max_index(t_stack *stack);
+int	find_min_index(t_stack *stack);
+int	find_closest(t_stack **stack, int target_index);
+
+void	push_min_to_b(t_stack **stack_a, t_stack **stack_b);
+void	push_all_to_a(t_stack **stack_a, t_stack **stack_b);
+int	stack_is_sorted(t_stack *stack);
+void update_indices(t_stack *stack);
+
 
 #endif

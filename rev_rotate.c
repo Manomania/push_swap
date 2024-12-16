@@ -14,15 +14,20 @@
 
 static int	ft_rev_rotate(t_stack **stack)
 {
-	t_stack *first;
 	t_stack *last;
+	t_stack *second_last;
 
+	if (!stack || !*stack || !(*stack)->next)
+		return (-1);
 	last = *stack;
-	first = (*stack)->next;
-	last->next = NULL;
-	while (first->next)
-		first = first->next;
-	first->next = last;
+	while (last->next)
+	{
+		second_last = last;
+		last = last->next;
+	}
+	second_last->next = NULL;
+	last->next = *stack;
+	*stack = last;
 	return (0);
 }
 

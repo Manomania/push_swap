@@ -5,7 +5,7 @@
 NAME				=	push_swap
 HEADER				=	push_swap.h
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Wextra -Werror -g
+CFLAGS 				= 	-Wall -Wextra -Werror -g3
 AR					=	ar rcs
 RM					=	rm -f
 
@@ -17,7 +17,8 @@ SRC_F				=	main \
 						rotate \
 						push \
 						handle_operations \
-						algo
+						sort_stack \
+						stack_utils
 
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
