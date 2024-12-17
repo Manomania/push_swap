@@ -29,7 +29,6 @@ static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
  *			to the top of stack_a.
  * @param	stack_a: A pointer to the t_stack on which the operation is
  *			performed.
- *			The stack must be valid.
  * @param	stack_b: A pointer to the t_stack on which the operation is
  *			performed.
  *			The stack must be valid.
@@ -37,7 +36,7 @@ static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
  */
 int	ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!stack_b)
+	if (!*stack_b)
 		return (-1);
 	ft_push(stack_a, stack_b);
 	ft_putendl_fd("pa", 1);
@@ -53,12 +52,11 @@ int	ft_pa(t_stack **stack_a, t_stack **stack_b)
  *			The stack must be valid.
  * @param	stack_b: A pointer to the t_stack on which the operation is
  *			performed.
- *			The stack must be valid.
  * @return	0 if the operation is successful, -1 otherwise.
  */
 int	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!stack_b)
+	if (!*stack_a)
 		return (-1);
 	ft_push(stack_b, stack_a);
 	ft_putendl_fd("pb", 1);

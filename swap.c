@@ -15,7 +15,8 @@
 static int	ft_swap(t_stack **stack)
 {
 	t_stack	*temp;
-	if (!stack || stack_lstsize(*stack) < 2)
+
+	if (!*stack || stack_lstsize(*stack) < 2)
 		return (-1);
 	temp = (*stack)->next;
 	(*stack)->next = temp->next;

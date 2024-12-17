@@ -1,45 +1,12 @@
 flowchart TD
-    A[Start] --> B{Is stack A empty?}
-    B -->|NO| Y{Is stack B empty ?}
-    B -->|YES| AA{Is stack B empty ?}
-    B -->|YES| V[End or perform a push]
-    AA -->|YES| Z
-    AA -->|NO| V
-    Y -->|YES| X{Is stack A sorted ?}
-    Y -->|NO| D{What type of operation?}
-
-    X -->|YES| Z
-    X -->|NO| D
-
-    D -->|Swap| E{Which stack?}
-    E -->|A| F[SA: Swap the top two elements of A]
-    E -->|B| G[SB: Swap the top two elements of B]
-    E -->|A and B| H[SS: Perform SA and SB simultaneously]
-
-    D -->|Push| I{Which direction?}
-    I -->|From B to A| J[PA: Move the top element of B to A]
-    I -->|From A to B| K[PB: Move the top element of A to B]
-
-    D -->|Rotate| L{Which stack?}
-    L -->|A| M[RA: Shift all elements of A up]
-    L -->|B| N[RB: Shift all elements of B up]
-    L -->|A and B| O[RR: Perform RA and RB simultaneously]
-
-    D -->|Reverse Rotate| P{Which stack?}
-    P -->|A| Q[RRA: Shift all elements of A down]
-    P -->|B| R[RRB: Shift all elements of B down]
-    P -->|A and B| S[RRR: Perform RRA and RRB simultaneously]
-
-    F --> T[Return to state verification]
-    G --> T
-    H --> T
-    J --> T
-    K --> T
-    M --> T
-    N --> T
-    O --> T
-    Q --> T
-    R --> T
-    S --> T
-    T --> B
-    AA --> Z[End]
+    1[Arguments] -->    2[Check_arguments]
+                        2 -->   8[Arguments are good]
+                        2 -->   3[Non numeric]
+                        2 -->   4[Duplicates]
+                        2 -->   5[No arguments]
+                        2 -->   6[INT_MIN or INT_MAX reached]
+                                3 & 4 & 5 & 6 -->   11[Return: Error]
+                                8 -->   9[START]
+                                        9 -->   10[Is STACK_A sorted ?]
+                                                10 -->  |YES| 10YES[PUSH_SWAP DONE125/100]
+                                                10 -->  |NO| 10NO[2222]

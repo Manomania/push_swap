@@ -18,7 +18,8 @@ SRC_F				=	main \
 						push \
 						handle_operations \
 						sort_stack \
-						stack_utils
+						stack_utils \
+						sort_three
 
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
