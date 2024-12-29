@@ -10,78 +10,67 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-void update_indices(t_stack *stack)
-{
-	int index = 0;
-	while (stack)
-	{
-		stack->index = index++;
-		stack = stack->next;
-	}
-}
-
-int find_max_index(t_stack *stack)
-{
-	int max_value;
-	int max_index;
-
-	if (!stack)
-		return (-1);
-
-	max_value = stack->value;
-	max_index = stack->index;
-
-	while (stack)
-	{
-		if (stack->value > max_value)
-		{
-			max_value = stack->value;
-			max_index = stack->index;
-		}
-		stack = stack->next;
-	}
-	return (max_index);
-}
-
-
-int find_min_index(t_stack *stack)
+int find_min(t_stack *stack)
 {
 	int min_value;
-	int min_index;
-
-	if (!stack)
-		return (-1);
 
 	min_value = stack->value;
-	min_index = stack->index;
-
 	while (stack)
 	{
 		if (stack->value < min_value)
-		{
 			min_value = stack->value;
-			min_index = stack->index;
-		}
 		stack = stack->next;
 	}
-	return (min_index);
+	return (min_value);
 }
 
-int	find_closest(t_stack **stack, int target_index)
+int	find_max(t_stack *stack)
 {
-	int	size_stack;
-	int	next;
-	int prev;
+	int max_value;
 
-	if (!stack || !*stack)
-		return (0);
-	size_stack = stack_lstsize(*stack);
-	next = target_index;
-	prev = size_stack - target_index;
-	if (next <= prev)
-		return (next);
-	else
-		return (-prev);
+	max_value = stack->value;
+	while (stack)
+	{
+		if (stack->value > max_value)
+			max_value = stack->value;
+		stack = stack->next;
+	}
+	return (max_value);
+}
+
+int	find_index(t_stack *stack, int value)
+{
+	int i;
+
+	i = 0;
+	while (stack->value != value)
+	{
+		i++;
+		stack = stack->next;
+	}
+	stack->index = 0;
+	return (i);
+}
+
+int	find_position(t_stack *stack, int target)
+{
+	t_stack	*temp;
+	int	min;
+	int i;
+
+	min = find_min(stack);
+	if (target > find_max(stack) || target < min)
+		return (find_index(stack, min));
+	temp = stack;
+	i = 0;
+	while (i < stack_lstsize(stack))
+	{
+		if (temp->next && temp->value < target && target < temp->next->value)
+			return (i);
+		temp = temp->next;
+		i++;
+	}
+	return (0);
 }

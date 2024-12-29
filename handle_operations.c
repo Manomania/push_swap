@@ -47,8 +47,8 @@ void handle_swap(t_stack **stack_a, t_stack **stack_b)
  */
 void handle_push(t_stack **stack_a, t_stack **stack_b)
 {
-	// if (!*stack_a || !*stack_b )
-	// 	return;
+	if (!*stack_a || !*stack_b )
+		return ;
 
 	if ((*stack_a)->value > (*stack_b)->value)
 		ft_pa(stack_a, stack_b);
@@ -67,8 +67,8 @@ void	handle_rotate(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*last_value_a;
 	t_stack	*last_value_b;
 
-	if (!*stack_a || !*stack_b)
-		return ;
+	// if (!*stack_a || !*stack_b)
+	// 	return ;
 	last_value_a = stack_lstlast(*stack_a);
 	last_value_b = stack_lstlast(*stack_b);
 	if ((*stack_a)->value > last_value_a->value &&
@@ -94,8 +94,8 @@ void	handle_rev_rotate(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*last_value_a;
 	t_stack	*last_value_b;
 
-	if (!*stack_a || !*stack_b)
-		return ;
+	// if (!*stack_a || !*stack_b)
+	// 	return ;
 	last_value_a = stack_lstlast(*stack_a);
 	last_value_b = stack_lstlast(*stack_b);
 	if ((*stack_a)->value > last_value_a->value &&

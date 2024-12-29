@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /**
  * @brief	Count the size of a linked list representng a stack.
@@ -34,7 +34,7 @@ t_stack	*stack_lstnew(int value)
 {
 	t_stack	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
 	new->value = value;

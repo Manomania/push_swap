@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-static int	ft_rev_rotate(t_stack **stack)
+static void	ft_rev_rotate(t_stack **stack)
 {
 	t_stack *last;
 	t_stack *second_last;
 
-	if (!*stack || !(*stack)->next)
-		return (-1);
 	last = *stack;
 	while (last->next)
 	{
@@ -28,33 +26,29 @@ static int	ft_rev_rotate(t_stack **stack)
 	second_last->next = NULL;
 	last->next = *stack;
 	*stack = last;
-	return (0);
 }
 
-int	ft_rra(t_stack **stack_a)
+void	ft_rra(t_stack **stack_a)
 {
-	if (!*stack_a)
-		return (-1);
+	if (!*stack_a || !(*stack_a)->next)
+		return ;
 	ft_rev_rotate(stack_a);
 	ft_putendl_fd("rra", 1);
-	return (0);
 }
 
-int	ft_rrb(t_stack **stack_b)
+void	ft_rrb(t_stack **stack_b)
 {
-	if (!*stack_b)
-		return (-1);
+	if (!*stack_b || !(*stack_b)->next)
+		return ;
 	ft_rev_rotate(stack_b);
 	ft_putendl_fd("rra", 1);
-	return (0);
 }
 
-int	ft_rrr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a || !*stack_b)
-		return (-1);
+	if (!*stack_a || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
+		return ;
 	ft_rra(stack_a);
 	ft_rra(stack_b);
 	ft_putendl_fd("rrr", 1);
-	return (0);
 }

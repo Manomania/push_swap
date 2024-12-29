@@ -33,47 +33,52 @@ typedef struct s_stack
 {
 	int	value;
 	int	index;
+	struct s_stack	*prev;
 	struct s_stack	*next;
 }		t_stack;
+
+typedef struct s_data
+{
+	int	med;
+	int	q1;
+	int	q2;
+	int	size;
+}		t_data;
 
 int main(int argc, char **argv);
 int	stack_lstsize(t_stack *lst);
 int	check_num(const char *str);
 int	check_dup(int argc, char **argv);
-int	int_check_min_max(int argc, char **argv);
+int	check_int_min_max(int argc, char **argv);
+
 
 t_stack	*stack_lstnew(int value);
 t_stack	*stack_lstlast(t_stack *lst);
 void	stack_lstadd_back(t_stack **lst, t_stack *new);
 void	free_stack(t_stack **stack);
 
-int	ft_sa(t_stack **stack_a);
-int	ft_sb(t_stack **stack_b);
-int	ft_ss(t_stack **stack_a, t_stack **stack_b);
-int	ft_pa(t_stack **stack_a, t_stack **stack_b);
-int	ft_pb(t_stack **stack_a, t_stack **stack_b);
-int	ft_ra(t_stack **stack_a);
-int	ft_rb(t_stack **stack_b);
-int	ft_rr(t_stack **stack_a, t_stack **stack_b);
-int	ft_rrb(t_stack **stack_b);
-int	ft_rra(t_stack **stack_a);
-int	ft_rrr(t_stack **stack_a, t_stack **stack_b);
-
-void	handle_swap(t_stack **stack_a, t_stack **stack_b);
-void	handle_push(t_stack **stack_a, t_stack **stack_b);
-void	handle_rotate(t_stack **stack_a, t_stack **stack_b);
-void	handle_rev_rotate(t_stack **stack_a, t_stack **stack_b);
-
-void	sort_three(t_stack **stack_a);
-
-int	find_max_index(t_stack *stack);
-int	find_min_index(t_stack *stack);
-int	find_closest(t_stack **stack, int target_index);
-
-void	push_min_to_b(t_stack **stack_a, t_stack **stack_b);
-void	push_all_to_a(t_stack **stack_a, t_stack **stack_b);
 int	stack_is_sorted(t_stack *stack);
-void update_indices(t_stack *stack);
+void	sort_three(t_stack **stack_a);
+int find_min(t_stack *stack);
+int find_max(t_stack *stack);
+int find_index(t_stack *stack, int value);
+int	find_position(t_stack *stack, int target);
+
+void	ft_sa(t_stack **stack_a);
+void	ft_sb(t_stack **stack_b);
+void	ft_ss(t_stack **stack_a, t_stack **stack_b);
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+void	ft_ra(t_stack **stack_a);
+void	ft_rb(t_stack **stack_b);
+void	ft_rr(t_stack **stack_a, t_stack **stack_b);
+void	ft_rrb(t_stack **stack_b);
+void	ft_rra(t_stack **stack_a);
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
+
+void	calcul_quartils(t_data **data, int len, t_stack *stack);
+int	get_nth_value(t_stack *stack, int n);
+
 
 
 #endif

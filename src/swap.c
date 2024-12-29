@@ -10,19 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-static int	ft_swap(t_stack **stack)
+static void	ft_swap(t_stack **stack)
 {
 	t_stack	*temp;
 
-	if (!*stack || stack_lstsize(*stack) < 2)
-		return (-1);
+	update_indices(*stack);
 	temp = (*stack)->next;
 	(*stack)->next = temp->next;
 	temp->next = *stack;
 	*stack = temp;
-	return (0);
 }
 
 /**
@@ -32,12 +30,11 @@ static int	ft_swap(t_stack **stack)
  *			The stack must be valid and contain at least 2 elements.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_sa(t_stack **stack_a)
+void	ft_sa(t_stack **stack_a)
 {
-	if (ft_swap(stack_a) == -1)
-		return (-1);
+	if (!*stack_a || !(*stack_a)->next)
+		return ;
 	ft_putendl_fd("sa", 1);
-	return (0);
 }
 
 /**
@@ -47,12 +44,11 @@ int	ft_sa(t_stack **stack_a)
  *			The stack must be valid and contain at least 2 elements.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_sb(t_stack **stack_b)
+void	ft_sb(t_stack **stack_b)
 {
-	if (ft_swap(stack_b) == -1)
-		return (-1);
+	if (!*stack_b || !(*stack_b)->next)
+		return ;
 	ft_putendl_fd("sb", 1);
-	return (0);
 }
 
 /**
@@ -64,12 +60,11 @@ int	ft_sb(t_stack **stack_b)
  *			The stack must be valid and contain at least 2 elements.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_ss(t_stack **stack_a, t_stack **stack_b)
+void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
-	if (stack_lstsize(*stack_a) < 2 || stack_lstsize(*stack_b) < 2)
-		return (-1);
+	if (!*stack_a  || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
+		return ;
 	ft_swap(stack_a);
 	ft_swap(stack_b);
 	ft_putendl_fd("ss", 1);
-	return (0);
 }

@@ -10,21 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-t_stack *args_to_list(int argc, char **argv)
-{
-	t_stack *stack = NULL;
-	int	i;
-
-	i = 1;
-	while (i < argc)
-	{
-		stack_lstadd_back(&stack, stack_lstnew(ft_atoi(argv[i])));
-		i++;
-	}
-	return (stack);
-}
+#include "../push_swap.h"
 
 static int	check_arguments(int argc, char **argv)
 {
@@ -43,7 +29,7 @@ static int	check_arguments(int argc, char **argv)
 			printf("\033[91mError: Duplicates\033[039m\n");
 			return (0);
 		}
-		if (!int_check_min_max(argc, argv))
+		if (!check_int_min_max(argc, argv))
 		{
 			printf("\033[91mError: Min or max value reached\033[039m\n");
 			return (0);
@@ -53,47 +39,48 @@ static int	check_arguments(int argc, char **argv)
 	return (1);
 }
 
+t_stack *args_to_list(int argc, char **argv)
+{
+	t_stack *stack = NULL;
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		stack_lstadd_back(&stack, stack_lstnew(ft_atoi(argv[i])));
+		i++;
+	}
+	return (stack);
+}
+
 int main(int argc, char **argv)
 {
 	t_stack *stack_a = NULL;
-	t_stack *stack_b = NULL;
+	t_data	*data;
 
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
 	if (argc == 1)
 	{
 		printf("\033[91mError: No arguments\033[039m\n");
 		return (1);
 	}
-
 	if (!check_arguments(argc, argv))
 		return (1);
-
 	stack_a = args_to_list(argc, argv);
-
 	if (stack_is_sorted(stack_a))
-	{
-		printf("\033[32mSTACK SORTED\033[39m");
 		return (free_stack(&stack_a), 0);
-	}
-
-	if (stack_lstsize(stack_a) == 3)
+	if (stack_lstsize(stack_a) == 2 && !stack_is_sorted(stack_a))
+		ft_sa(&stack_a);
+	else if (stack_lstsize(stack_a) == 3)
 		sort_three(&stack_a);
-	// else if (stack_lstsize(stack_a) >= 4)
-	// {
-	// 	//
-	// 	// ft_pb(&stack_a, &stack_b);
-	// 	// ft_pb(&stack_a, &stack_b);
-	// 	// while (!stack_is_sorted(stack_a))
-	// 	// {
-	// 	//
-	// 	// 	handle_push(&stack_a, &stack_b);
-	// 	// 	handle_swap(&stack_a, &stack_b);
-	// 	// 	handle_rotate(&stack_a, &stack_b);
-	// 	// 	handle_rev_rotate(&stack_a, &stack_b);
-	// 	// }
-	// }
-		push_min_to_b(&stack_a, &stack_b);
-		push_all_to_a(&stack_a, &stack_b);
+	else
+	{
+		get_median_quartil();
+		ft_sort(&stack_a);
+	}
 	free_stack(&stack_a);
-	free_stack(&stack_b);
+	free(data);
 	return (0);
 }

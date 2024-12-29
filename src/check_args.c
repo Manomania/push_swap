@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static char	*normalize(char *str)
 {
@@ -101,7 +101,7 @@ long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-int	int_check_min_max(int argc, char **argv)
+int	check_int_min_max(int argc, char **argv)
 {
 	int	i;
 	long value;

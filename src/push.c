@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
+static void	ft_push(t_stack **stack_dest, t_stack **stack_src)
 {
 	t_stack *temp;
 
@@ -20,7 +20,6 @@ static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
 	(*stack_src)->next = *stack_dest;
 	*stack_dest = *stack_src;
 	*stack_src = temp;
-	return (0);
 }
 
 /**
@@ -34,13 +33,12 @@ static int	ft_push(t_stack **stack_dest, t_stack **stack_src)
  *			The stack must be valid.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_pa(t_stack **stack_a, t_stack **stack_b)
+void	ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
 	if (!*stack_b)
-		return (-1);
+		return ;
 	ft_push(stack_a, stack_b);
 	ft_putendl_fd("pa", 1);
-	return (0);
 }
 
 /**
@@ -54,11 +52,10 @@ int	ft_pa(t_stack **stack_a, t_stack **stack_b)
  *			performed.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_pb(t_stack **stack_a, t_stack **stack_b)
+void	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
 	if (!*stack_a)
-		return (-1);
+		return ;
 	ft_push(stack_b, stack_a);
 	ft_putendl_fd("pb", 1);
-	return (0);
 }

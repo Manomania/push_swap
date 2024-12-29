@@ -10,38 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-static void	sort_three_utils(t_stack **stack, int first, int second, int third)
-{
-	if (first > second && second < third && first < third)
-		ft_sa(stack);
-	else if (first > second && second > third)
-	{
-		ft_sa(stack);
-		ft_rra(stack);
-	}
-	else if (first > second && second < third)
-		ft_ra(stack);
-	else if (first < second && second > third && first < third)
-	{
-		ft_sa(stack);
-		ft_ra(stack);
-	}
-	else if (first < second && second > third)
-		ft_rra(stack);
-}
+#include "../push_swap.h"
 
 void	sort_three(t_stack **stack_a)
 {
-	int	first;
-	int	second;
-	int	third;
-
-	if (!*stack_a || !(*stack_a)->next || !(*stack_a)->next->next)
-		return ;
-	first = (*stack_a)->value;
-	second = (*stack_a)->next->value;
-	third = (*stack_a)->next->next->value;
-	sort_three_utils(stack_a, first, second, third);
+	if (find_min(*stack_a) == (*stack_a)->value)
+	{
+		ft_rra(stack_a);
+		ft_sa(stack_a);
+	}
+	else if (find_max(*stack_a) == (*stack_a)->value)
+	{
+		ft_ra(stack_a);
+		if (!stack_is_sorted(*stack_a))
+			ft_sa(stack_a);
+	}
+	else
+	{
+		if (find_index(*stack_a, find_max(*stack_a)) == 1)
+			ft_rra(stack_a);
+		else
+			ft_sa(stack_a);
+	}
 }

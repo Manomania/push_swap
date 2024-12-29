@@ -10,16 +10,15 @@ AR					=	ar rcs
 RM					=	rm -f
 
 SRC_F				=	main \
-						check_args \
 						chained_list \
-						rev_rotate \
+						check_args \
+						stack_utils \
+						sort_three \
+						sort_stack \
+						push \
 						swap \
 						rotate \
-						push \
-						handle_operations \
-						sort_stack \
-						stack_utils \
-						sort_three
+						rev_rotate
 
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
@@ -29,7 +28,7 @@ OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))
 #                                                      DIRECTORY                                                       #
 ########################################################################################################################
 
-SRC_DIR				=
+SRC_DIR				=	src/
 OBJ_DIR				=	obj/
 INC_DIR				=	.
 

@@ -10,23 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-static int	ft_rotate(t_stack **stack)
+static void	ft_rotate(t_stack **stack)
 {
-	t_stack *first;
-	t_stack *last;
+	t_stack *temp;
 
-	if (!*stack || !(*stack)->next)
-		return (-1);
-	first = *stack;
-	*stack = first->next;
-	first->next = NULL;
-	last = *stack;
-	while (last->next)
-		last = last->next;
-	last->next = first;
-	return (0);
+	temp = *stack;
+	*stack = stack_lstlast(*stack);
+	(*stack)->next = temp;
+	*stack = temp->next;
+	temp->next = NULL;
 }
 
 /**
@@ -37,13 +31,12 @@ static int	ft_rotate(t_stack **stack)
  *			The stack must be valid.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_ra(t_stack **stack_a)
+void	ft_ra(t_stack **stack_a)
 {
-	if (!*stack_a)
-		return (-1);
+	if (!*stack_a || !(*stack_a)->next)
+		return ;
 	ft_rotate(stack_a);
 	ft_putendl_fd("ra", 1);
-	return (0);
 }
 
 /**
@@ -54,13 +47,12 @@ int	ft_ra(t_stack **stack_a)
  *			The stack must be valid.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_rb(t_stack **stack_b)
+void	ft_rb(t_stack **stack_b)
 {
-	if (!*stack_b)
-		return (-1);
+	if (!*stack_b || !(*stack_b)->next)
+		return ;
 	ft_rotate(stack_b);
 	ft_putendl_fd("rb", 1);
-	return (0);
 }
 
 /**
@@ -73,12 +65,11 @@ int	ft_rb(t_stack **stack_b)
  *			The stack must be valid.
  * @return	0 if the operation is successful, -1 otherwise.
  */
-int	ft_rr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a || !*stack_b)
-		return (-1);
+	if (!*stack_a || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
+		return ;
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
 	ft_putendl_fd("rr", 1);
-	return (0);
 }
