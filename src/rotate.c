@@ -14,13 +14,7 @@
 
 static void	ft_rotate(t_stack **stack)
 {
-	t_stack *temp;
-
-	temp = *stack;
-	*stack = stack_lstlast(*stack);
-	(*stack)->next = temp;
-	*stack = temp->next;
-	temp->next = NULL;
+	*stack = (*stack)->next;
 }
 
 /**

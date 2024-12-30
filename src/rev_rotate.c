@@ -14,23 +14,12 @@
 
 static void	ft_rev_rotate(t_stack **stack)
 {
-	t_stack *last;
-	t_stack *second_last;
-
-	last = *stack;
-	while (last->next)
-	{
-		second_last = last;
-		last = last->next;
-	}
-	second_last->next = NULL;
-	last->next = *stack;
-	*stack = last;
+	*stack = (*stack)->prev;
 }
 
 void	ft_rra(t_stack **stack_a)
 {
-	if (!*stack_a || !(*stack_a)->next)
+	if (!*stack_a || !(*stack_a)->prev)
 		return ;
 	ft_rev_rotate(stack_a);
 	ft_putendl_fd("rra", 1);
@@ -38,7 +27,7 @@ void	ft_rra(t_stack **stack_a)
 
 void	ft_rrb(t_stack **stack_b)
 {
-	if (!*stack_b || !(*stack_b)->next)
+	if (!*stack_b || !(*stack_b)->prev)
 		return ;
 	ft_rev_rotate(stack_b);
 	ft_putendl_fd("rra", 1);
@@ -46,7 +35,7 @@ void	ft_rrb(t_stack **stack_b)
 
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
+	if (!*stack_a || !*stack_b || !(*stack_a)->prev || !(*stack_b)->prev)
 		return ;
 	ft_rra(stack_a);
 	ft_rra(stack_b);

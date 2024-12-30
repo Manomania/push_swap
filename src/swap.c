@@ -12,15 +12,14 @@
 
 #include "../push_swap.h"
 
+
 static void	ft_swap(t_stack **stack)
 {
-	t_stack	*temp;
+	int	temp;
 
-	update_indices(*stack);
-	temp = (*stack)->next;
-	(*stack)->next = temp->next;
-	temp->next = *stack;
-	*stack = temp;
+	temp = (*stack)->value;
+	(*stack)->value = (*stack)->next->value;
+	(*stack)->next->value = temp;
 }
 
 /**

@@ -14,43 +14,50 @@
 
 int find_min(t_stack *stack)
 {
-	int min_value;
+	int		min;
+	t_stack	*temp;
 
-	min_value = stack->value;
-	while (stack)
+	temp = stack->next;
+	min = stack->value;
+	while (temp != stack && temp != NULL)
 	{
-		if (stack->value < min_value)
-			min_value = stack->value;
-		stack = stack->next;
+		if (temp->value < min)
+			min = temp->value;
+		temp = temp->next;
 	}
-	return (min_value);
+	return (min);
 }
 
 int	find_max(t_stack *stack)
 {
-	int max_value;
+	int		max;
+	t_stack	*temp;
 
-	max_value = stack->value;
-	while (stack)
+	temp = stack->next;
+	max = stack->value;
+	while (temp != stack && temp != NULL)
 	{
-		if (stack->value > max_value)
-			max_value = stack->value;
-		stack = stack->next;
+		if (temp->value > max)
+			max = temp->value;
+		temp = temp->next;
 	}
-	return (max_value);
+	return (max);
 }
 
-int	find_index(t_stack *stack, int value)
+int find_index(t_stack *stack, int value)
 {
-	int i;
+	t_stack	*temp;
+	int		i;
 
 	i = 0;
-	while (stack->value != value)
+	temp = stack;
+	while (temp->next != stack)
 	{
-		i++;
-		stack = stack->next;
+		if (temp->value == value)
+			return (i);
+		temp = temp->next;
+		++i;
 	}
-	stack->index = 0;
 	return (i);
 }
 
@@ -64,13 +71,12 @@ int	find_position(t_stack *stack, int target)
 	if (target > find_max(stack) || target < min)
 		return (find_index(stack, min));
 	temp = stack;
-	i = 0;
-	while (i < stack_lstsize(stack))
+	i = -1;
+	while (++i < stack_lstsize(stack))
 	{
-		if (temp->next && temp->value < target && target < temp->next->value)
+		if (temp->prev->value < target && target < temp->value)
 			return (i);
 		temp = temp->next;
-		i++;
 	}
 	return (0);
 }

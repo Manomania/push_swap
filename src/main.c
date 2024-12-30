@@ -47,23 +47,62 @@ t_stack *args_to_list(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		stack_lstadd_back(&stack, stack_lstnew(ft_atoi(argv[i])));
+		add_to_list(&stack, ft_atoi(argv[i]));
 		i++;
 	}
 	return (stack);
 }
 
+
+static void	launch_algo(t_stack *stack_a, t_stack *stack_b, t_data *data)
+{
+	if (data->size > 3)
+		if (!stack_is_sorted(stack_a))
+			ft_sort(stack_a, stack_b, data);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
+	free(data);
+	exit(1);
+}
+
+void print_data(t_data *data)
+{
+	if (data == NULL)
+	{
+		printf("Les données sont vides.\n");
+		return;
+	}
+
+	printf("Médiane : %d\n", data->med);
+	printf("Premier quartile (Q1) : %d\n", data->q1);
+	printf("Troisième quartile (Q2) : %d\n", data->q2);
+	printf("Taille : %d\n", data->size);
+}
+
+void print_sorted_stack(t_stack *stack)
+{
+	t_stack *temp;
+
+	if (!stack)
+		return;
+
+	temp = stack;
+	do
+	{
+		printf("%d\n", temp->value);
+		temp = temp->next;
+	} while (temp && temp != stack);
+}
+
 int main(int argc, char **argv)
 {
 	t_stack *stack_a = NULL;
-	t_data	*data;
+	t_stack *stack_b = NULL;
+	t_data *data = NULL;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	if (argc == 1)
+	if (argc <= 2)
 	{
-		printf("\033[91mError: No arguments\033[039m\n");
+		printf("\033[91mError: No enough arguments\033[039m\n");
 		return (1);
 	}
 	if (!check_arguments(argc, argv))
@@ -77,10 +116,17 @@ int main(int argc, char **argv)
 		sort_three(&stack_a);
 	else
 	{
-		get_median_quartil();
-		ft_sort(&stack_a);
+		data = malloc(sizeof(t_data));
+		if (!data)
+			return (free_stack(&stack_a), 1);
+		get_median_quartil(&stack_a, &data);
+		stack_a = args_to_list(argc, argv);
+		print_data(data);
+		// print_sorted_stack(stack_a);
+		launch_algo(stack_a, stack_b, data);
 	}
 	free_stack(&stack_a);
+	free_stack(&stack_b);
 	free(data);
 	return (0);
 }

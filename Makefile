@@ -14,11 +14,15 @@ SRC_F				=	main \
 						check_args \
 						stack_utils \
 						sort_three \
-						sort_stack \
 						push \
 						swap \
 						rotate \
-						rev_rotate
+						rev_rotate \
+						fill_data \
+						algorithm \
+						operations_in_stack \
+						quick_sort \
+						stack_is_sorted
 
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))

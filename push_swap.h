@@ -32,9 +32,8 @@
 typedef struct s_stack
 {
 	int	value;
-	int	index;
-	struct s_stack	*prev;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }		t_stack;
 
 typedef struct s_data
@@ -54,7 +53,8 @@ int	check_int_min_max(int argc, char **argv);
 
 t_stack	*stack_lstnew(int value);
 t_stack	*stack_lstlast(t_stack *lst);
-void	stack_lstadd_back(t_stack **lst, t_stack *new);
+// void	stack_lstadd_back(t_stack **lst, t_stack *new);
+t_stack *add_to_list(t_stack **stack, int value);
 void	free_stack(t_stack **stack);
 
 int	stack_is_sorted(t_stack *stack);
@@ -76,9 +76,22 @@ void	ft_rrb(t_stack **stack_b);
 void	ft_rra(t_stack **stack_a);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
-void	calcul_quartils(t_data **data, int len, t_stack *stack);
 int	get_nth_value(t_stack *stack, int n);
+void	calcul_quartils(t_data **data, int len, t_stack *stack);
 
+int	get_best_move(t_stack *stack_a, t_stack *stack_b);
+int	elem_in_first_quartils(t_stack *stack, int q1, int q2);
+void	min_to_top(t_stack **stack);
+void	replace_stack(t_stack **stack);
+
+void	get_median_quartil(t_stack **stack, t_data **data);
+
+void	ft_sort(t_stack *stack_a, t_stack *stack_b, t_data *data);
+void	push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data);
+void	insertion_sort(t_stack **p_a, t_stack **p_b, int b_move);
+void	fill_data(t_data **data, int len, t_stack *stack);
+
+void	quick_sort_stack(t_stack **stack);
 
 
 #endif

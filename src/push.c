@@ -16,10 +16,17 @@ static void	ft_push(t_stack **stack_dest, t_stack **stack_src)
 {
 	t_stack *temp;
 
-	temp = (*stack_src)->next;
-	(*stack_src)->next = *stack_dest;
-	*stack_dest = *stack_src;
-	*stack_src = temp;
+	if (add_to_list(stack_dest, (*stack_src)->value) == NULL)
+	{
+		free_stack(stack_dest);
+		free_stack(stack_src);
+		exit(1);
+	}
+	temp = (*stack_src);
+	(*stack_src)->prev->next = (*stack_src)->next;
+	(*stack_src)->next->prev = (*stack_src)->prev;
+	*stack_src = (*stack_src)->next;
+	free(temp);
 }
 
 /**
