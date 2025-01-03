@@ -31,8 +31,7 @@ static void	ft_swap(t_stack **stack)
  */
 void	ft_sa(t_stack **stack_a)
 {
-	if (!*stack_a || !(*stack_a)->next)
-		return ;
+	ft_swap(stack_a);
 	ft_putendl_fd("sa", 1);
 }
 
@@ -45,8 +44,7 @@ void	ft_sa(t_stack **stack_a)
  */
 void	ft_sb(t_stack **stack_b)
 {
-	if (!*stack_b || !(*stack_b)->next)
-		return ;
+	ft_swap(stack_b);
 	ft_putendl_fd("sb", 1);
 }
 
@@ -61,8 +59,6 @@ void	ft_sb(t_stack **stack_b)
  */
 void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a  || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
-		return ;
 	ft_swap(stack_a);
 	ft_swap(stack_b);
 	ft_putendl_fd("ss", 1);

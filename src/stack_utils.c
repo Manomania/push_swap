@@ -58,19 +58,42 @@ int	find_index(t_stack *stack, int value)
 		temp = temp->next;
 		++i;
 	}
-	printf("%sFIND INDEX %d%s\n", GREEN, i, RESET);
+	// printf("%sFIND INDEX %d%s\n", GREEN, i, RESET);
 	return (i);
 }
 
-int	find_position(t_stack *stack, int target)
+// int	find_position(t_stack *stack, int target)
+// {
+// 	t_stack	*temp;
+// 	int		min;
+// 	int		i;
+// 	int		size;
+//
+// 	min = find_min(stack);
+// 	// printf("%sTARGET %d%s\n", GREEN, target, RESET);
+// 	if (target > find_max(stack) || target < min)
+// 		return (find_index(stack, min));
+// 	size = stack_lstsize(stack);
+// 	i = -1;
+// 	temp = stack;
+// 	while (++i < size)
+// 	{
+// 		if (temp->prev->value < target && target < temp->value)
+// 			return (i);
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }
+
+
+int find_position(t_stack *stack, int target)
 {
-	t_stack	*temp;
-	int		min;
-	int		i;
-	int		size;
+	t_stack    *temp;
+	int        min;
+	int        i;
+	int        size;
 
 	min = find_min(stack);
-	printf("%sTARGET %d%s\n", GREEN, target, RESET);
 	if (target > find_max(stack) || target < min)
 		return (find_index(stack, min));
 	size = stack_lstsize(stack);
@@ -78,9 +101,15 @@ int	find_position(t_stack *stack, int target)
 	temp = stack;
 	while (++i < size)
 	{
+		// Si la valeur cible est entre la dernière et la première valeur
+		if ((temp == stack) && (target < temp->value) &&
+			(target > temp->prev->value))
+			return (0);
+		// Si la valeur cible est entre deux valeurs consécutives
 		if (temp->prev->value < target && target < temp->value)
 			return (i);
 		temp = temp->next;
 	}
-	return (0);
+	// Si on arrive ici, la valeur doit être placée à la fin
+	return (find_index(stack, find_min(stack)));
 }

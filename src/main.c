@@ -58,7 +58,7 @@ static void	launch_algo(t_stack *stack_a, t_stack *stack_b, t_data *data)
 {
 	if (data->size > 3)
 		if (!stack_is_sorted(stack_a))
-			ft_sort(stack_a, stack_b, data);
+			ft_sort(&stack_a, &stack_b, data);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	free(data);
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 		// print_sorted_stack(stack_a);
 		free_stack(&stack_a);
 		stack_a = args_to_list(argc, argv);
-		print_data(data);
+		// print_data(data);
 		launch_algo(stack_a, stack_b, data);
 	}
 	free_stack(&stack_a);

@@ -14,7 +14,7 @@
 
 static void	ft_rotate(t_stack **stack)
 {
-	*stack = (*stack)->next;
+		*stack = (*stack)->next;
 }
 
 /**
@@ -27,10 +27,11 @@ static void	ft_rotate(t_stack **stack)
  */
 void	ft_ra(t_stack **stack_a)
 {
-	if (!*stack_a || !(*stack_a)->next)
-		return ;
-	ft_rotate(stack_a);
-	ft_putendl_fd("ra", 1);
+	if (*stack_a && (*stack_a)->next != *stack_a)
+	{
+		ft_rotate(stack_a);
+		ft_putendl_fd("ra", 1);
+	}
 }
 
 /**
@@ -43,10 +44,11 @@ void	ft_ra(t_stack **stack_a)
  */
 void	ft_rb(t_stack **stack_b)
 {
-	if (!*stack_b || !(*stack_b)->next)
-		return ;
-	ft_rotate(stack_b);
-	ft_putendl_fd("rb", 1);
+	if (*stack_b && (*stack_b)->next != *stack_b)
+	{
+		ft_rotate(stack_b);
+		ft_putendl_fd("rb", 1);
+	}
 }
 
 /**
@@ -61,9 +63,10 @@ void	ft_rb(t_stack **stack_b)
  */
 void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a || !*stack_b || !(*stack_a)->next || !(*stack_b)->next)
-		return ;
-	ft_rotate(stack_a);
-	ft_rotate(stack_b);
-	ft_putendl_fd("rr", 1);
+	if (*stack_a && (*stack_a)->next != *stack_a && *stack_b && (*stack_b)->next != *stack_b)
+	{
+		ft_rotate(stack_a);
+		ft_rotate(stack_b);
+		ft_putendl_fd("rr", 1);
+	}
 }

@@ -18,19 +18,19 @@ static int	count_move(t_stack *stack_a, t_stack *stack_b, int target)
 	int	index;
 
 	index = find_index(stack_b, target);
-	printf("%sCOUNT MOVE INDEX %d%s\n", RED, index, RESET);
+	// printf("%sCOUNT MOVE INDEX %d%s\n", RED, index, RESET);
 	count = 1;
 	if (index > 1 && index > (stack_lstsize(stack_b) / 2))
 		count += stack_lstsize(stack_b) - index - 1;
 	else if (index > 1 && index <= (stack_lstsize(stack_b) / 2))
 		count += index - 1;
 	index = find_position(stack_a, target);
-	printf("%sCOUNT MOVE INDEXXXXXXX %d%s\n", RED, index, RESET);
+	// printf("%sCOUNT MOVE INDEXXXXXXX %d%s\n", RED, index, RESET);
 	if (index > 1 && index > (stack_lstsize(stack_a) / 2))
 		count += stack_lstsize(stack_a) - index - 1;
 	else if (index > 1 && index <= (stack_lstsize(stack_a) / 2))
 		count += index - 1;
-	printf("%sCOUNT MOVE COUNT %d%s\n", MAGENTA, count, RESET);
+	// printf("%sCOUNT MOVE COUNT %d%s\n", MAGENTA, count, RESET);
 	return (count);
 }
 
@@ -43,13 +43,13 @@ int	get_best_move(t_stack *stack_a, t_stack *stack_b)
 
 	best_move_target = stack_b->value;
 	best_move_count = count_move(stack_a, stack_b, best_move_target);
-	printf("%sGET BEST MOVE VALUE_b %d%s\n", RED, stack_b->value, RESET);
+	// printf("%sGET BEST MOVE VALUE_b %d%s\n", RED, stack_b->value, RESET);
 	temp = stack_b->next;
-	printf("%sGET BEST MOVE TEMP %d%s\n", RED, temp->value, RESET);
+	// printf("%sGET BEST MOVE TEMP %d%s\n", RED, temp->value, RESET);
 	while (temp != stack_b && temp != NULL)
 	{
 		move_count = count_move(stack_a, stack_b, temp->value);
-		printf("%sGET BEST MOVE_count %d%s\n", RED, move_count, RESET);
+		// printf("%sGET BEST MOVE_count %d%s\n", RED, move_count, RESET);
 		if (move_count < best_move_count)
 		{
 			best_move_count = move_count;
@@ -57,7 +57,7 @@ int	get_best_move(t_stack *stack_a, t_stack *stack_b)
 		}
 		temp = temp->next;
 	}
-	printf("%sBESTMOVE %d%s\n", ORANGE, best_move_target, RESET);
+	// printf("%sBESTMOVE %d%s\n", ORANGE, best_move_target, RESET);
 	return (best_move_target);
 }
 
@@ -99,29 +99,4 @@ void	replace_stack(t_stack **stack)
 				ft_rra(&stack_a);
 	}
 	(*stack) = stack_a;
-}
-
-void	min_to_top(t_stack **stack)
-{
-	int		min_value;
-	int		i;
-	t_stack	*current_stack;
-
-	current_stack = *stack;
-	min_value = find_min(current_stack);
-	if (current_stack->value != min_value)
-	{
-		i = find_index(current_stack, min_value);
-		if (i <= stack_lstsize(current_stack) / 2)
-		{
-			while (current_stack->value != min_value)
-				ft_ra(&current_stack);
-		}
-		else
-		{
-			while (current_stack->value != min_value)
-				ft_rra(&current_stack);
-		}
-	}
-	(*stack) = current_stack;
 }

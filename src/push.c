@@ -14,14 +14,9 @@
 
 static void ft_push(t_stack **stack_dest, t_stack **stack_src)
 {
-	t_stack *src_node;
+	t_stack *temp;
 
-	if (!stack_src || !(*stack_src))
-		return;
-
-	src_node = *stack_src;
-
-	// Gérer la pile source
+	temp = *stack_src;
 	if ((*stack_src)->next == *stack_src)
 		*stack_src = NULL;
 	else
@@ -30,21 +25,19 @@ static void ft_push(t_stack **stack_dest, t_stack **stack_src)
 		(*stack_src)->next->prev = (*stack_src)->prev;
 		*stack_src = (*stack_src)->next;
 	}
-
-	// Gérer la pile destination
 	if (!*stack_dest)
 	{
-		*stack_dest = src_node;
-		src_node->next = src_node;
-		src_node->prev = src_node;
+		*stack_dest = temp;
+		temp->next = temp;
+		temp->prev = temp;
 	}
 	else
 	{
-		src_node->next = *stack_dest;
-		src_node->prev = (*stack_dest)->prev;
-		(*stack_dest)->prev->next = src_node;
-		(*stack_dest)->prev = src_node;
-		*stack_dest = src_node;
+		temp->next = *stack_dest;
+		temp->prev = (*stack_dest)->prev;
+		(*stack_dest)->prev->next = temp;
+		(*stack_dest)->prev = temp;
+		*stack_dest = temp;
 	}
 }
 /**
@@ -60,8 +53,6 @@ static void ft_push(t_stack **stack_dest, t_stack **stack_src)
  */
 void	ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_b)
-		return ;
 	ft_push(stack_a, stack_b);
 	ft_putendl_fd("pa", 1);
 }
@@ -79,8 +70,6 @@ void	ft_pa(t_stack **stack_a, t_stack **stack_b)
  */
 void	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!*stack_a)
-		return ;
 	ft_push(stack_b, stack_a);
 	ft_putendl_fd("pb", 1);
 }
