@@ -6,7 +6,7 @@
 /*   By: maximart <maximart@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:52:13 by maximart          #+#    #+#             */
-/*   Updated: 2024/12/15 12:15:57 by maximart         ###   ########.fr       */
+/*   Updated: 2025/01/03 14:56:42 by maximart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data);
 void	insertion_sort(t_stack **p_a, t_stack **p_b, int b_move);
 void	fill_data(t_data **data, int size, t_stack *stack);
 
+// void	quick_sort_stack(t_stack **stack);
+t_stack	*get_nth_node(t_stack *stack, int n);
 void	quick_sort_stack(t_stack **stack);
 
 
