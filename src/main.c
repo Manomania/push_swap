@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 		// print_sorted_stack(stack_a);
 		free_stack(&stack_a);
 		stack_a = args_to_list(argc, argv);
-		// print_data(data);
+		print_data(data);
 		launch_algo(stack_a, stack_b, data);
 	}
 	free_stack(&stack_a);

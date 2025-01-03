@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-int find_min(t_stack *stack)
+int	find_min(t_stack *stack)
 {
 	int		min;
 	t_stack	*temp;
@@ -44,7 +44,7 @@ int	find_max(t_stack *stack)
 	return (max);
 }
 
-int find_index(t_stack *stack, int value)
+int	find_index(t_stack *stack, int value)
 {
 	t_stack	*temp;
 	int		i;
@@ -58,21 +58,25 @@ int find_index(t_stack *stack, int value)
 		temp = temp->next;
 		++i;
 	}
+	printf("%sFIND INDEX %d%s\n", GREEN, i, RESET);
 	return (i);
 }
 
 int	find_position(t_stack *stack, int target)
 {
 	t_stack	*temp;
-	int	min;
-	int i;
+	int		min;
+	int		i;
+	int		size;
 
 	min = find_min(stack);
+	printf("%sTARGET %d%s\n", GREEN, target, RESET);
 	if (target > find_max(stack) || target < min)
 		return (find_index(stack, min));
-	temp = stack;
+	size = stack_lstsize(stack);
 	i = -1;
-	while (++i < stack_lstsize(stack))
+	temp = stack;
+	while (++i < size)
 	{
 		if (temp->prev->value < target && target < temp->value)
 			return (i);

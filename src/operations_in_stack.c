@@ -18,16 +18,19 @@ static int	count_move(t_stack *stack_a, t_stack *stack_b, int target)
 	int	index;
 
 	index = find_index(stack_b, target);
+	printf("%sCOUNT MOVE INDEX %d%s\n", RED, index, RESET);
 	count = 1;
 	if (index > 1 && index > (stack_lstsize(stack_b) / 2))
 		count += stack_lstsize(stack_b) - index - 1;
 	else if (index > 1 && index <= (stack_lstsize(stack_b) / 2))
 		count += index - 1;
 	index = find_position(stack_a, target);
+	printf("%sCOUNT MOVE INDEXXXXXXX %d%s\n", RED, index, RESET);
 	if (index > 1 && index > (stack_lstsize(stack_a) / 2))
 		count += stack_lstsize(stack_a) - index - 1;
 	else if (index > 1 && index <= (stack_lstsize(stack_a) / 2))
 		count += index - 1;
+	printf("%sCOUNT MOVE COUNT %d%s\n", MAGENTA, count, RESET);
 	return (count);
 }
 
@@ -40,10 +43,13 @@ int	get_best_move(t_stack *stack_a, t_stack *stack_b)
 
 	best_move_target = stack_b->value;
 	best_move_count = count_move(stack_a, stack_b, best_move_target);
+	printf("%sGET BEST MOVE VALUE_b %d%s\n", RED, stack_b->value, RESET);
 	temp = stack_b->next;
+	printf("%sGET BEST MOVE TEMP %d%s\n", RED, temp->value, RESET);
 	while (temp != stack_b && temp != NULL)
 	{
 		move_count = count_move(stack_a, stack_b, temp->value);
+		printf("%sGET BEST MOVE_count %d%s\n", RED, move_count, RESET);
 		if (move_count < best_move_count)
 		{
 			best_move_count = move_count;
@@ -51,6 +57,7 @@ int	get_best_move(t_stack *stack_a, t_stack *stack_b)
 		}
 		temp = temp->next;
 	}
+	printf("%sBESTMOVE %d%s\n", ORANGE, best_move_target, RESET);
 	return (best_move_target);
 }
 
@@ -68,7 +75,7 @@ int	elem_in_first_quartils(t_stack *stack, int q1, int q2)
 		if (q1 <= temp->value && temp->value <= q2)
 			return (1);
 		temp = temp->next;
-		i++;
+		++i;
 	}
 	return (0);
 }
@@ -93,7 +100,6 @@ void	replace_stack(t_stack **stack)
 	}
 	(*stack) = stack_a;
 }
-
 
 void	min_to_top(t_stack **stack)
 {

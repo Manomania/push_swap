@@ -12,23 +12,41 @@
 
 #include "../include/push_swap.h"
 
-static void	ft_push(t_stack **stack_dest, t_stack **stack_src)
+static void ft_push(t_stack **stack_dest, t_stack **stack_src)
 {
-	t_stack *temp;
+	t_stack *src_node;
 
-	if (add_to_list(stack_dest, (*stack_src)->value) == NULL)
+	if (!stack_src || !(*stack_src))
+		return;
+
+	src_node = *stack_src;
+
+	// Gérer la pile source
+	if ((*stack_src)->next == *stack_src)
+		*stack_src = NULL;
+	else
 	{
-		free_stack(stack_dest);
-		free_stack(stack_src);
-		exit(1);
+		(*stack_src)->prev->next = (*stack_src)->next;
+		(*stack_src)->next->prev = (*stack_src)->prev;
+		*stack_src = (*stack_src)->next;
 	}
-	temp = (*stack_src);
-	(*stack_src)->prev->next = (*stack_src)->next;
-	(*stack_src)->next->prev = (*stack_src)->prev;
-	*stack_src = (*stack_src)->next;
-	free(temp);
-}
 
+	// Gérer la pile destination
+	if (!*stack_dest)
+	{
+		*stack_dest = src_node;
+		src_node->next = src_node;
+		src_node->prev = src_node;
+	}
+	else
+	{
+		src_node->next = *stack_dest;
+		src_node->prev = (*stack_dest)->prev;
+		(*stack_dest)->prev->next = src_node;
+		(*stack_dest)->prev = src_node;
+		*stack_dest = src_node;
+	}
+}
 /**
  * @brief	Performs the "pa" operation on a given stack.
  *			The operation swap the firsts elements of the stack_b

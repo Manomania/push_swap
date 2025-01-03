@@ -103,8 +103,9 @@ long	ft_atol(const char *str)
 
 int	check_int_min_max(int argc, char **argv)
 {
-	int	i;
-	long value;
+	int		i;
+	long	value;
+
 	i = 1;
 	while (i < argc)
 	{

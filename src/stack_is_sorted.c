@@ -14,12 +14,20 @@
 
 int	stack_is_sorted(t_stack *stack)
 {
-	while (stack && stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
+	int	i;
+	int	size;
 
+	size = stack_lstsize(stack);
+	if (size > 0)
+	{
+		i = 1;
+		while (i++ < size)
+		{
+			if (stack->value > stack->next->value)
+				return (0);
+			stack = stack->next;
+		}
+		return (1);
+	}
+	return (0);
+}
