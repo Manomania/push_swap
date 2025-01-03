@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 static int	count_move(t_stack *stack_a, t_stack *stack_b, int target)
 {

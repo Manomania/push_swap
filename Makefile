@@ -3,7 +3,7 @@
 ########################################################################################################################\
 
 NAME				=	push_swap
-HEADER				=	push_swap.h
+HEADER				=	$(INC_DIR)push_swap.h
 CC 					= 	gcc
 CFLAGS 				= 	-Wall -Wextra -Werror -g3
 AR					=	ar rcs
@@ -24,7 +24,6 @@ SRC_F				=	main \
 						quick_sort \
 						stack_is_sorted
 
-
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))
 
@@ -34,7 +33,7 @@ OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))
 
 SRC_DIR				=	src/
 OBJ_DIR				=	obj/
-INC_DIR				=	.
+INC_DIR				=	include/
 
 ########################################################################################################################
 #                                                         LIB                                                          #
@@ -50,20 +49,20 @@ LIBFT				=	$(LIBFT_DIR)libft.a
 all:					$(LIBFT) $(NAME)
 
 clean:
-								@echo "$(RED)[$(OBJ_DIR)]:$(DEF_COLOR)"
-								@rm -rf $(OBJ_DIR)
-								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
-								@echo "$(RED)[$(LIBFT_DIR)$(OBJ_DIR)]:$(DEF_COLOR)"
-								@$(MAKE) --silent -C $(LIBFT_DIR) clean
-								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@echo "$(RED)[$(OBJ_DIR)]:$(DEF_COLOR)"
+							@rm -rf $(OBJ_DIR)
+							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@echo "$(RED)[$(LIBFT_DIR)$(OBJ_DIR)]:$(DEF_COLOR)"
+							@$(MAKE) --silent -C $(LIBFT_DIR) clean
+							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
 
 fclean: 				clean
-								@echo "$(RED)[$(NAME)]:$(DEF_COLOR)"
-								@$(RM) $(NAME)
-								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
-								@echo "$(RED)[$(LIBFT)]:$(DEF_COLOR)"
-								@$(MAKE) --silent -C $(LIBFT_DIR) fclean
-								@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@echo "$(RED)[$(NAME)]:$(DEF_COLOR)"
+							@$(RM) $(NAME)
+							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@echo "$(RED)[$(LIBFT)]:$(DEF_COLOR)"
+							@$(MAKE) --silent -C $(LIBFT_DIR) fclean
+							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
 
 re: 					fclean all
 
@@ -83,7 +82,7 @@ $(LIBFT):
 
 $(OBJ_DIR)%.o: 			$(SRC_DIR)%.c $(HEADER)
 							@mkdir -p $(OBJ_DIR)
-							@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR)include/ -c $< -o $@
+							@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR)$(INC_DIR) -c $< -o $@
 
 ########################################################################################################################
 #                                                      COLOURS                                                         #

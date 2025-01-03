@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 static int check_for_opti(t_stack **stack_a, t_stack **stack_b, int pos_a, int pos_b)
 {

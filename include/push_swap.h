@@ -25,7 +25,7 @@
 # define CYAN "\033[96m"
 # define WHITE "\033[97m"
 
-# include "super_libft/include/libft.h"
+# include "../super_libft/include/libft.h"
 # include <stdio.h>
 # include <limits.h>
 
@@ -53,7 +53,6 @@ int	check_int_min_max(int argc, char **argv);
 
 t_stack	*stack_lstnew(int value);
 t_stack	*stack_lstlast(t_stack *lst);
-// void	stack_lstadd_back(t_stack **lst, t_stack *new);
 t_stack *add_to_list(t_stack **stack, int value);
 void	free_stack(t_stack **stack);
 
