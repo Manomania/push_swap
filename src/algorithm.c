@@ -93,7 +93,6 @@ void push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data)
 
 void ft_sort(t_stack *stack_a, t_stack *stack_b, t_data *data)
 {
-	printf("Début du tri\n");
 	while (elem_in_first_quartils(stack_a, data->q1, data->q2) && data->size >= 8)
 	{
 		if (stack_a->value >= data->q1 && stack_a->value <= data->med)
@@ -114,15 +113,10 @@ void ft_sort(t_stack *stack_a, t_stack *stack_b, t_data *data)
 	{
 		ft_pb(&stack_a, &stack_b);
 		if (stack_b->value < data->med)
-		{
 			ft_rb(&stack_b);
-		}
 	}
 	if (!(stack_is_sorted(stack_a)))
-	{
 		sort_three(&stack_a);
-	}
 	push_a_optimize(stack_a, stack_b, data);
-	printf("Fin du tri\n");
 }
 

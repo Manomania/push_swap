@@ -119,10 +119,11 @@ int main(int argc, char **argv)
 		data = malloc(sizeof(t_data));
 		if (!data)
 			return (free_stack(&stack_a), 1);
-		get_median_quartil(&stack_a, &data);
-		stack_a = args_to_list(argc, argv);
-		print_data(data);
+		get_median_quartil(&stack_a, stack_lstsize(stack_a), &data);
 		// print_sorted_stack(stack_a);
+		free_stack(&stack_a);
+		stack_a = args_to_list(argc, argv);
+		// print_data(data);
 		launch_algo(stack_a, stack_b, data);
 	}
 	free_stack(&stack_a);

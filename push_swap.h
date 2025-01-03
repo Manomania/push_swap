@@ -84,12 +84,12 @@ int	elem_in_first_quartils(t_stack *stack, int q1, int q2);
 void	min_to_top(t_stack **stack);
 void	replace_stack(t_stack **stack);
 
-void	get_median_quartil(t_stack **stack, t_data **data);
+void	get_median_quartil(t_stack **stack, int size, t_data **data);
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b, t_data *data);
 void	push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data);
 void	insertion_sort(t_stack **p_a, t_stack **p_b, int b_move);
-void	fill_data(t_data **data, int len, t_stack *stack);
+void	fill_data(t_data **data, int size, t_stack *stack);
 
 void	quick_sort_stack(t_stack **stack);
 

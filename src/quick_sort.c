@@ -57,13 +57,12 @@ static void	quick_sort_recursive(t_stack *low, t_stack *high)
 		quick_sort_recursive(pivot->next, high);
 }
 
-// Fonction pour récupérer le dernier nœud de la liste
 t_stack *get_last_node(t_stack *stack)
 {
 	t_stack *current = stack;
 	while (current && current->next != stack)
 		current = current->next;
-	return current;
+	return (current);
 }
 
 void quick_sort_stack(t_stack **stack)
@@ -73,7 +72,6 @@ void quick_sort_stack(t_stack **stack)
 
 	t_stack *last = get_last_node(*stack);
 
-	// Rompre la circularité
 	if (last)
 		last->next = NULL;
 	if (*stack)
@@ -81,7 +79,6 @@ void quick_sort_stack(t_stack **stack)
 
 	quick_sort_recursive(*stack, last);
 
-	// Restaurer la circularité
 	last = get_last_node(*stack);
 	if (last)
 		last->next = *stack;
@@ -89,7 +86,20 @@ void quick_sort_stack(t_stack **stack)
 		(*stack)->prev = last;
 }
 
-void	get_median_quartil(t_stack **stack, t_data **data)
+static t_stack *get_nth_node(t_stack *stack, int n)
+{
+	t_stack *current = stack;
+	int count = 1;
+
+	while (current != NULL && count < n)
+	{
+		current = current->next;
+		count++;
+	}
+	return current;
+}
+
+void	get_median_quartil(t_stack **stack, int size, t_data **data)
 {
 	t_stack	*temp = NULL;
 
@@ -97,6 +107,9 @@ void	get_median_quartil(t_stack **stack, t_data **data)
 		return ;
 	temp = *stack;
 	quick_sort_stack(&temp);
+	(*data)->size = size;
+	(*data)->med = (size + 1) / 2;
 	fill_data(data, stack_lstsize(temp), temp);
+	(*data)->med = get_nth_node(temp, (*data)->med)->value;
 }
 
