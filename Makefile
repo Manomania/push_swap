@@ -23,7 +23,8 @@ SRC_F				=	main \
 						operations_in_stack \
 						quick_sort \
 						stack_is_sorted \
-						get_data
+						get_data \
+						ft_sort
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))

@@ -85,31 +85,35 @@ int	find_index(t_stack *stack, int value)
 // 	return (0);
 // }
 
-
 int find_position(t_stack *stack, int target)
 {
-	t_stack    *temp;
-	int        min;
-	int        i;
-	int        size;
+	t_stack *temp;
+	int min;
+	int max;
+	int i;
 
 	min = find_min(stack);
-	if (target > find_max(stack) || target < min)
+	max = find_max(stack);
+
+	// Si target est plus petit que tous les éléments
+	if (target < min)
 		return (find_index(stack, min));
-	size = stack_lstsize(stack);
-	i = -1;
+
+	// Si target est plus grand que tous les éléments
+	if (target > max)
+		return (find_index(stack, min));
+
+	i = 0;
 	temp = stack;
-	while (++i < size)
+	do
 	{
-		// Si la valeur cible est entre la dernière et la première valeur
-		if ((temp == stack) && (target < temp->value) &&
-			(target > temp->prev->value))
-			return (0);
-		// Si la valeur cible est entre deux valeurs consécutives
+		// Si on trouve une position valide
 		if (temp->prev->value < target && target < temp->value)
 			return (i);
 		temp = temp->next;
-	}
-	// Si on arrive ici, la valeur doit être placée à la fin
-	return (find_index(stack, find_min(stack)));
+		i++;
+	} while (temp != stack);
+
+	// Si on n'a pas trouvé de position, on met après le plus petit élément
+	return (find_index(stack, min));
 }
