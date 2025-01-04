@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-void	size_five(t_stack *stack, t_data **data)
+static void	size_five(t_stack *stack, t_data **data)
 {
 	t_stack	*current;
 	int		i;

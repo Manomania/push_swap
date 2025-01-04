@@ -58,62 +58,33 @@ int	find_index(t_stack *stack, int value)
 		temp = temp->next;
 		++i;
 	}
-	// printf("%sFIND INDEX %d%s\n", GREEN, i, RESET);
 	return (i);
 }
 
-// int	find_position(t_stack *stack, int target)
-// {
-// 	t_stack	*temp;
-// 	int		min;
-// 	int		i;
-// 	int		size;
-//
-// 	min = find_min(stack);
-// 	// printf("%sTARGET %d%s\n", GREEN, target, RESET);
-// 	if (target > find_max(stack) || target < min)
-// 		return (find_index(stack, min));
-// 	size = stack_lstsize(stack);
-// 	i = -1;
-// 	temp = stack;
-// 	while (++i < size)
-// 	{
-// 		if (temp->prev->value < target && target < temp->value)
-// 			return (i);
-// 		temp = temp->next;
-// 	}
-// 	return (0);
-// }
-
-int find_position(t_stack *stack, int target)
+int	find_position(t_stack *stack, int target)
 {
-	t_stack *temp;
-	int min;
-	int max;
-	int i;
+	t_stack	*temp;
+	int		min;
+	int		max;
+	int		i;
+	int		run;
 
 	min = find_min(stack);
 	max = find_max(stack);
-
-	// Si target est plus petit que tous les éléments
 	if (target < min)
 		return (find_index(stack, min));
-
-	// Si target est plus grand que tous les éléments
 	if (target > max)
 		return (find_index(stack, min));
-
 	i = 0;
 	temp = stack;
-	do
+	run = 1;
+	while (run || temp != stack)
 	{
-		// Si on trouve une position valide
+		run = 0;
 		if (temp->prev->value < target && target < temp->value)
 			return (i);
 		temp = temp->next;
 		i++;
-	} while (temp != stack);
-
-	// Si on n'a pas trouvé de position, on met après le plus petit élément
+	}
 	return (find_index(stack, min));
 }

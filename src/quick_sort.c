@@ -72,7 +72,7 @@ void	quick_sort_stack(t_stack **stack)
 {
 	t_stack	*last;
 
-	if (!(*stack)) // add error !stack if bug
+	if (!(*stack))
 		return ;
 	last = get_last_node(*stack);
 	if (last)

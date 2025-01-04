@@ -44,55 +44,60 @@ typedef struct s_data
 	int	size;
 }		t_data;
 
-int main(int argc, char **argv);
-int	stack_lstsize(t_stack *lst);
-int	check_num(const char *str);
-int	check_dup(int argc, char **argv);
-int	check_int_min_max(int argc, char **argv);
+void	insertion_sort(t_stack **stack_a, t_stack **stack_b, int b_move);
+void	push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data);
 
-
+int	stack_lstsize(t_stack *stack);
 t_stack	*stack_lstnew(int value);
-t_stack	*stack_lstlast(t_stack *lst);
-t_stack *add_to_list(t_stack **stack, int value);
+t_stack	*stack_lstlast(t_stack *stack);
+t_stack	*add_to_list(t_stack **stack, int value);
+void	free_stack(t_stack **stack);
 void	free_stack(t_stack **stack);
 
+int	check_dup(int argc, char **argv);
+int	check_num(const char *str);
+long	ft_atol(const char *str);
+int	check_int_min_max(int argc, char **argv);
+
+int	check_error(int argc, char **argv);
+
+void	fill_data(t_data **data, int size, t_stack *stack);
+
+void	ft_sort(t_stack **stack_a, t_stack **stack_b, t_data *data);
+
+t_stack	*get_nth_node(t_stack *stack, int n);
+void	get_median_quartil(t_stack **stack, int size, t_data **data);
+
+int	get_best_move(t_stack *stack_a, t_stack *stack_b);
+int	elem_in_first_quartils(t_stack *stack, int q1, int q2);
+void	replace_stack(t_stack **stack);
+
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+
+void	quick_sort_stack(t_stack **stack);
+
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+
+void	ft_ra(t_stack **stack_a);
+void	ft_rb(t_stack **stack_b);
+void	ft_rr(t_stack **s_a, t_stack **s_b);
+
+void	ft_rra(t_stack **stack_a);
+void	ft_rrb(t_stack **stack_b);
+void	ft_rrr(t_stack **s_a, t_stack **s_b);
+
+void	sort_three(t_stack **pile_a);
+
 int	stack_is_sorted(t_stack *stack);
-void	sort_three(t_stack **stack_a);
-int find_min(t_stack *stack);
-int find_max(t_stack *stack);
-int find_index(t_stack *stack, int value);
+
+int	find_min(t_stack *stack);
+int	find_max(t_stack *stack);
+int	find_index(t_stack *stack, int value);
 int	find_position(t_stack *stack, int target);
 
 void	ft_sa(t_stack **stack_a);
 void	ft_sb(t_stack **stack_b);
 void	ft_ss(t_stack **stack_a, t_stack **stack_b);
-void	ft_pa(t_stack **stack_a, t_stack **stack_b);
-void	ft_pb(t_stack **stack_a, t_stack **stack_b);
-void	ft_ra(t_stack **stack_a);
-void	ft_rb(t_stack **stack_b);
-void	ft_rr(t_stack **stack_a, t_stack **stack_b);
-void	ft_rrb(t_stack **stack_b);
-void	ft_rra(t_stack **stack_a);
-void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
-
-int	get_nth_value(t_stack *stack, int n);
-void	calcul_quartils(t_data **data, int len, t_stack *stack);
-
-int	get_best_move(t_stack *stack_a, t_stack *stack_b);
-int	elem_in_first_quartils(t_stack *stack, int q1, int q2);
-void	min_to_top(t_stack **stack);
-void	replace_stack(t_stack **stack);
-
-void	get_median_quartil(t_stack **stack, int size, t_data **data);
-
-void	ft_sort(t_stack **stack_a, t_stack **stack_b, t_data *data);
-void	push_a_optimize(t_stack *stack_a, t_stack *stack_b, t_data *data);
-void	insertion_sort(t_stack **p_a, t_stack **p_b, int b_move);
-void	fill_data(t_data **data, int size, t_stack *stack);
-
-// void	quick_sort_stack(t_stack **stack);
-t_stack	*get_nth_node(t_stack *stack, int n);
-void	quick_sort_stack(t_stack **stack);
-
-
 #endif

@@ -19,12 +19,6 @@ static char	*normalize(char *str)
 	return (str);
 }
 
-/**
- * @brief Check for duplicate arguments with the function norm
- * @param argc is the number of arguments
- * @param argv is the argument to compare
- * @return int 0 if duplicates are found, 1 otherwise
- */
 int	check_dup(int argc, char **argv)
 {
 	int		i;
@@ -49,11 +43,6 @@ int	check_dup(int argc, char **argv)
 	return (1);
 }
 
-/**
- * @brief Checks if the string contains only digits, + or -, and no spaces.
- * @param str The string to validate.
- * @return int 1 if the string do not contain only digits, 0 otherwise.
- */
 int	check_num(const char *str)
 {
 	int	i;

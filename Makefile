@@ -24,7 +24,8 @@ SRC_F				=	main \
 						quick_sort \
 						stack_is_sorted \
 						get_data \
-						ft_sort
+						ft_sort \
+						check_error
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))

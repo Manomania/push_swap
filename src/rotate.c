@@ -14,17 +14,9 @@
 
 static void	ft_rotate(t_stack **stack)
 {
-		*stack = (*stack)->next;
+	*stack = (*stack)->next;
 }
 
-/**
- * @brief	Performs the "ra" operation on a given stack.
-*			The operation rotate the first element of the stack_b
- *			to the last position within the same stack.
- * @param	stack_a: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid.
- * @return	0 if the operation is successful, -1 otherwise.
- */
 void	ft_ra(t_stack **stack_a)
 {
 	if (*stack_a && (*stack_a)->next != *stack_a)
@@ -34,14 +26,6 @@ void	ft_ra(t_stack **stack_a)
 	}
 }
 
-/**
- * @brief	Performs the "rb" operation on a given stack.
- *			The operation rotate the first element of the stack_b
- *			to the last position within the same stack.
- * @param	stack_b: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid.
- * @return	0 if the operation is successful, -1 otherwise.
- */
 void	ft_rb(t_stack **stack_b)
 {
 	if (*stack_b && (*stack_b)->next != *stack_b)
@@ -51,22 +35,12 @@ void	ft_rb(t_stack **stack_b)
 	}
 }
 
-/**
- * @brief	Performs the "rr" operation on a given stack.
- *			This operation rotates the first element of stack_a and stack_b
- *			to the last position within their respective stacks.
- * @param	stack_a: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid.
- * @param	stack_b: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid.
- * @return	0 if the operation is successful, -1 otherwise.
- */
-void	ft_rr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rr(t_stack **s_a, t_stack **s_b)
 {
-	if (*stack_a && (*stack_a)->next != *stack_a && *stack_b && (*stack_b)->next != *stack_b)
+	if (*s_a && (*s_a)->next != *s_a && *s_b && (*s_b)->next != *s_b)
 	{
-		ft_rotate(stack_a);
-		ft_rotate(stack_b);
+		ft_rotate(s_a);
+		ft_rotate(s_b);
 		ft_putendl_fd("rr", 1);
 	}
 }

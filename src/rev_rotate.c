@@ -35,12 +35,12 @@ void	ft_rrb(t_stack **stack_b)
 	}
 }
 
-void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rrr(t_stack **s_a, t_stack **s_b)
 {
-	if (*stack_a && (*stack_a)->prev != *stack_a && *stack_b && (*stack_b)->prev != *stack_b)
+	if (*s_a && (*s_a)->prev != *s_a && *s_b && (*s_b)->prev != *s_b)
 	{
-		ft_rra(stack_a);
-		ft_rrb(stack_b);
+		ft_rra(s_a);
+		ft_rrb(s_b);
 		ft_putendl_fd("rrr", 1);
 	}
 }

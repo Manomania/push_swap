@@ -12,7 +12,6 @@
 
 #include "../include/push_swap.h"
 
-
 static void	ft_swap(t_stack **stack)
 {
 	int	temp;
@@ -22,41 +21,18 @@ static void	ft_swap(t_stack **stack)
 	(*stack)->next->value = temp;
 }
 
-/**
- * @brief	Performs the "sa" operation on a given stack.
- *			The operation swap the firsts 2 elements of the stack.
- * @param	stack_a: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid and contain at least 2 elements.
- * @return	0 if the operation is successful, -1 otherwise.
- */
 void	ft_sa(t_stack **stack_a)
 {
 	ft_swap(stack_a);
 	ft_putendl_fd("sa", 1);
 }
 
-/**
- * @brief	Performs the "sb" operation on a given stack
-*			The operation swap the firsts 2 elements of the stack.
- * @param	stack_b: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid and contain at least 2 elements.
- * @return	0 if the operation is successful, -1 otherwise.
- */
 void	ft_sb(t_stack **stack_b)
 {
 	ft_swap(stack_b);
 	ft_putendl_fd("sb", 1);
 }
 
-/**
- * @brief	Performs the "ss" operation on two stacks
- *  *		The operation swap the firsts 2 elements of the two stack.
- * @param	stack_a: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid and contain at least 2 elements.
- * @param	stack_b: A pointer to the t_stack on which the operation is performed.
- *			The stack must be valid and contain at least 2 elements.
- * @return	0 if the operation is successful, -1 otherwise.
- */
 void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_swap(stack_a);

@@ -15,7 +15,7 @@
 t_stack	*get_nth_node(t_stack *stack, int n)
 {
 	t_stack	*current;
-	int count;
+	int		count;
 
 	current = stack;
 	count = 1;
@@ -29,9 +29,10 @@ t_stack	*get_nth_node(t_stack *stack, int n)
 
 void	get_median_quartil(t_stack **stack, int size, t_data **data)
 {
-	t_stack	*temp = NULL;
+	t_stack	*temp;
 
-	if (!(*stack)) // add error !stack if bug
+	temp = NULL;
+	if (!(*stack))
 		return ;
 	temp = *stack;
 	quick_sort_stack(&temp);
