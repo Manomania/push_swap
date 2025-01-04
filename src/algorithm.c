@@ -48,12 +48,11 @@ static void	rotate_b_to_pos(t_stack **stack_b, int pos_b)
 	}
 }
 
-static void	rotate_a_to_pos(t_stack **stack_a, int pos_a, int offset)
+static void	rotate_a_to_pos(t_stack **stack_a, int pos_a)
 {
 	int	len;
 
 	len = stack_lstsize(*stack_a);
-	pos_a -= offset;
 	if (pos_a <= len / 2)
 		while (pos_a--)
 			ft_ra(stack_a);
@@ -77,7 +76,7 @@ void	insertion_sort(t_stack **stack_a, t_stack **stack_b, int b_move)
 	pos_a -= optimized;
 	pos_b -= optimized;
 	rotate_b_to_pos(stack_b, pos_b);
-	rotate_a_to_pos(stack_a, pos_a, 0);
+	rotate_a_to_pos(stack_a, pos_a);
 	ft_pa(stack_a, stack_b);
 }
 

@@ -9,23 +9,23 @@ CFLAGS 				= 	-Wall -Wextra -Werror -g3
 AR					=	ar rcs
 RM					=	rm -f
 
-SRC_F				=	main \
+SRC_F				=	algorithm \
 						chained_list \
 						check_args \
-						stack_utils \
-						sort_three \
-						push \
-						swap \
-						rotate \
-						rev_rotate \
+						check_error \
 						fill_data \
-						algorithm \
-						operations_in_stack \
-						quick_sort \
-						stack_is_sorted \
-						get_data \
 						ft_sort \
-						check_error
+						get_data \
+						main \
+						operations_in_stack \
+						push \
+						quick_sort \
+						rev_rotate \
+						rotate \
+						sort_three \
+						stack_is_sorted \
+						stack_utils \
+						swap
 
 SRC					=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_F)))
 OBJ 				= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_F)))
