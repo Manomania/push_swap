@@ -53,9 +53,6 @@ int	main(int argc, char **argv)
 
 	stack_b = NULL;
 	check_error(argc, argv);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (free_stack(&stack_a), 1);
 	stack_a = args_to_list(argc, argv);
 	if (stack_is_sorted(stack_a))
 		return (free_stack(&stack_a), 0);
@@ -65,6 +62,9 @@ int	main(int argc, char **argv)
 		sort_three(&stack_a);
 	else
 	{
+		data = malloc(sizeof(t_data));
+		if (!data)
+			return (free_stack(&stack_a), 1);
 		get_median_quartil(&stack_a, stack_lstsize(stack_a), &data);
 		free_stack(&stack_a);
 		stack_a = args_to_list(argc, argv);
