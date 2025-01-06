@@ -37,7 +37,6 @@ void	get_median_quartil(t_stack **stack, int size, t_data **data)
 	temp = *stack;
 	quick_sort_stack(&temp);
 	(*data)->size = size;
-	(*data)->med = (size + 1) / 2;
 	fill_data(data, stack_lstsize(temp), temp);
 	(*data)->med = get_nth_node(temp, (*data)->med)->value;
 }

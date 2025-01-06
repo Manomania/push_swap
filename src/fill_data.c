@@ -45,6 +45,8 @@ void	fill_data(t_data **data, int size, t_stack *stack)
 {
 	if (size % 2 == 0)
 		(*data)->med = size / 2;
+	else
+		(*data)->med = (size + 1) / 2;
 	(*data)->q1 = ((*data)->med + 1) / 2;
 	if ((*data)->med % 2 == 0)
 		(*data)->q1 = (*data)->med / 2;
