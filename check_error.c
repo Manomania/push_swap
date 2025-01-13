@@ -41,11 +41,6 @@ static int	check_arguments(int argc, char **argv)
 
 int	check_error(int argc, char **argv)
 {
-	if (argc <= 2)
-	{
-		printf("\033[91mError: Not enough argument\033[039m\n");
-		return (1);
-	}
 	if (!check_arguments(argc, argv))
 		return (1);
 	return (0);

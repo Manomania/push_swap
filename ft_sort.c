@@ -32,7 +32,7 @@ void	ft_sort(t_stack **s_a, t_stack **s_b, t_data *data)
 		if ((*s_b)->value < data->med)
 			ft_rb(s_b);
 	}
-	if (!(stack_is_sorted(*s_a)))
+	if (!stack_is_sorted(*s_a))
 		sort_three(s_a);
 	push_a_optimize(*s_a, *s_b, data);
 }
