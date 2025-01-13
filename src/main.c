@@ -6,20 +6,59 @@
 /*   By: maximart <maximart@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 08:23:49 by maximart          #+#    #+#             */
-/*   Updated: 2024/12/12 10:23:39 by maximart         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:56:42 by maximart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static t_stack	*args_to_list(int argc, char **argv)
+// t_stack	*fill_stack(int *argc, char **split_args)
+// {
+// 	t_stack	*stack;
+// 	int		i;
+//
+// 	stack = malloc(sizeof(t_stack));
+// 	if (!stack)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < *argc)
+// 	{
+// 		if (check_error(stack, argc, split_args))
+// 			return (NULL);
+// 		add_to_list(&stack, ft_atoi(split_args[i]));
+// 		free(split_args[i]);
+// 		i++;
+// 	}
+// 	return (stack);
+// }
+//
+// static t_stack	*split_one_argument(int *argc, char **argv)
+// {
+// 	t_stack	*stack;
+// 	int		i;
+// 	char	**split_args;
+//
+// 	stack = NULL;
+// 	split_args = ft_split(argv[1], ' ');
+// 	if (!split_args)
+// 		return (NULL);
+// 	i = 0;
+// 	while (split_args[i])
+// 		i++;
+// 	stack = fill_stack(argc, split_args);
+// 	free_split(split_args);
+// 	*argc = i + 1;
+// 	return (stack);
+// }
+
+static t_stack	*args_to_list(int *argc, char **argv)
 {
 	t_stack	*stack;
 	int		i;
 
 	stack = NULL;
 	i = 1;
-	while (i < argc)
+	while (i < *argc)
 	{
 		add_to_list(&stack, ft_atoi(argv[i]));
 		i++;
@@ -27,22 +66,44 @@ static t_stack	*args_to_list(int argc, char **argv)
 	return (stack);
 }
 
-static void	launch_algo(t_stack *stack_a, t_stack *stack_b, t_data *data)
+static void	free_both(t_stack *stack_a, t_stack *stack_b)
 {
-	if (data->size > 3)
-		if (!stack_is_sorted(stack_a))
-			ft_sort(&stack_a, &stack_b, data);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
+}
+
+static void	launch_algo(t_stack *stack_a, t_stack *stack_b, t_data *data)
+{
+	if (data->size > 3 && !stack_is_sorted(stack_a))
+		ft_sort(&stack_a, &stack_b, data);
+	free_both(stack_a, stack_b);
 	free(data);
 	exit(1);
 }
 
-static void	free_all(t_stack *stack_a, t_stack *stack_b, t_data *data)
+void	multiple_choice(int argc, char **argv, t_stack *stack_a, t_data *data)
 {
-	free_stack(&stack_a);
-	free_stack(&stack_b);
-	free(data);
+	t_stack	*stack_b;
+
+	stack_b = NULL;
+	if (stack_lstsize(stack_a) == 2 && !stack_is_sorted(stack_a))
+		ft_sa(&stack_a);
+	else if (stack_lstsize(stack_a) == 3)
+		sort_three(&stack_a);
+	else
+	{
+		data = malloc(sizeof(t_data));
+		if (!data)
+		{
+			free_stack(&stack_a);
+			return ;
+		}
+		get_median_quartil(&stack_a, stack_lstsize(stack_a), &data);
+		free_stack(&stack_a);
+		stack_a = args_to_list(&argc, argv);
+		launch_algo(stack_a, stack_b, data);
+		free(data);
+	}
 }
 
 int	main(int argc, char **argv)
@@ -52,24 +113,12 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	stack_b = NULL;
-	check_error(argc, argv);
-	stack_a = args_to_list(argc, argv);
-	if (stack_is_sorted(stack_a))
-		return (free_stack(&stack_a), 0);
-	if (stack_lstsize(stack_a) == 2 && !stack_is_sorted(stack_a))
-		ft_sa(&stack_a);
-	else if (stack_lstsize(stack_a) == 3)
-		sort_three(&stack_a);
-	else
-	{
-		data = malloc(sizeof(t_data));
-		if (!data)
-			return (free_stack(&stack_a), 1);
-		get_median_quartil(&stack_a, stack_lstsize(stack_a), &data);
-		free_stack(&stack_a);
-		stack_a = args_to_list(argc, argv);
-		launch_algo(stack_a, stack_b, data);
-	}
-	free_all(stack_a, stack_b, data);
+	data = NULL;
+	if (check_error(argc, argv))
+		return (1);
+	stack_a = args_to_list(&argc, argv);
+	if (!stack_is_sorted(stack_a))
+		multiple_choice(argc, argv, stack_a, data);
+	free_both(stack_a, stack_b);
 	return (0);
 }
