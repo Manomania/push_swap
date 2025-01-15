@@ -6,7 +6,7 @@
 /*   By: maximart <maximart@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 08:23:49 by maximart          #+#    #+#             */
-/*   Updated: 2025/01/13 10:56:42 by maximart         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:04:58 by maximart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,27 +81,27 @@ static void	launch_algo(t_stack *stack_a, t_stack *stack_b, t_data *data)
 	exit(1);
 }
 
-void	multiple_choice(int argc, char **argv, t_stack *stack_a, t_data *data)
+static void	multiple_choice(int ac, char **av, t_stack *s_a, t_data *data)
 {
 	t_stack	*stack_b;
 
 	stack_b = NULL;
-	if (stack_lstsize(stack_a) == 2 && !stack_is_sorted(stack_a))
-		ft_sa(&stack_a);
-	else if (stack_lstsize(stack_a) == 3)
-		sort_three(&stack_a);
+	if (stack_lstsize(s_a) == 2 && !stack_is_sorted(s_a))
+		ft_sa(&s_a);
+	else if (stack_lstsize(s_a) == 3)
+		sort_three(&s_a);
 	else
 	{
 		data = malloc(sizeof(t_data));
 		if (!data)
 		{
-			free_stack(&stack_a);
+			free_stack(&s_a);
 			return ;
 		}
-		get_median_quartil(&stack_a, stack_lstsize(stack_a), &data);
-		free_stack(&stack_a);
-		stack_a = args_to_list(&argc, argv);
-		launch_algo(stack_a, stack_b, data);
+		get_median_quartil(&s_a, stack_lstsize(s_a), &data);
+		free_stack(&s_a);
+		s_a = args_to_list(&ac, av);
+		launch_algo(s_a, stack_b, data);
 		free(data);
 	}
 }

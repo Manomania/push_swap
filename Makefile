@@ -49,39 +49,57 @@ LIBFT				=	$(LIBFT_DIR)libft.a
 #                                                       TARGETS                                                        #
 ########################################################################################################################
 
-all:					$(LIBFT) $(NAME)
+all:					.print_header $(LIBFT) $(NAME)
 
-clean:
-							@echo "$(RED)[$(OBJ_DIR)]:$(DEF_COLOR)"
+clean:					.print_header
+							@printf "\n"
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(OBJ_DIR)]:" "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@rm -rf $(OBJ_DIR)
-							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
-							@echo "$(RED)[$(LIBFT_DIR)$(OBJ_DIR)]:$(DEF_COLOR)"
+							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
+							@printf "\n"
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(LIBFT_DIR)$(OBJ_DIR)]:" "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@$(MAKE) --silent -C $(LIBFT_DIR) clean
-							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@printf "$(RED)=> Deleted!\n$(DEF_COLOR)\n"
 
 fclean: 				clean
-							@echo "$(RED)[$(NAME)]:$(DEF_COLOR)"
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(NAME)]:" "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@$(RM) $(NAME)
-							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
-							@echo "$(RED)[$(LIBFT)]:$(DEF_COLOR)"
+							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
+							@printf "\n"
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(LIBFT)]:"  "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@$(MAKE) --silent -C $(LIBFT_DIR) fclean
-							@echo "$(GREEN)=> Deleted!\n$(DEF_COLOR)"
+							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
+							@printf "\n"
 
-re: 					fclean all
+re: 					.print_header fclean $(LIBFT) $(NAME)
 
-.PHONY: 				all bonus clean fclean re
+.print_header:
+							$(call DISPLAY_TITLE)
+
+.PHONY: 				all bonus clean fclean re .print_header
 
 ########################################################################################################################
 #                                                       COMMANDS                                                       #
 ########################################################################################################################
 
 $(NAME):				$(LIBFT) $(OBJ)
-							@echo "$(YELLOW)[$(NAME)]:$(DEF_COLOR)"
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(NAME)]:$(DEF_COLOR)\n"
 							@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
-							@echo "$(GREEN)=> Success!\n$(DEF_COLOR)"
+							@NUM_TOTAL=$$(echo "$(words $(SRC))"); \
+							for i in $$(seq 1 $$NUM_TOTAL); do \
+								for frame in $(FRAMES); do \
+									printf "\r$$frame Linking... [$$i/$$NUM_TOTAL]"; \
+									sleep $(SLEEP_TIME); \
+								done; \
+							done; \
+							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$$NUM_TOTAL/$$NUM_TOTAL]" "[✓]$(DEF_COLOR)\n"
+							@printf "\n"
+
 
 $(LIBFT):
+							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(LIBFT)]:$(DEF_COLOR)\n"
 							@$(MAKE) --silent -C $(LIBFT_DIR)
+							@printf "\n"
 
 $(OBJ_DIR)%.o: 			$(SRC_DIR)%.c $(HEADER)
 							@mkdir -p $(OBJ_DIR)
@@ -101,3 +119,35 @@ BLUE				=	\033[0;94m
 MAGENTA				=	\033[0;95m
 CYAN				=	\033[0;96m
 WHITE				=	\033[0;97m
+
+########################################################################################################################
+#                                                       DISPLAY                                                        #
+########################################################################################################################
+
+SPACEMENT			=	-40
+COMPILED_SRCS		=	0
+NUM_SRCS			=	$(words	$(SRC))
+FRAMES				=	⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
+SLEEP_TIME			=	0.001
+
+#define PROGRESS_BAR_PERCENTAGE
+#						$(eval COMPILED_SRCS := $(shell expr $(COMPILED_SRCS) + 1))
+#						@percentage=$$(echo "scale=2; $(COMPILED_SRCS) * 100 / $(NUM_SRCS)" | bc); \
+#						for frame in $(FRAMES); do \
+#							printf "\r$$frame Compiling... [%d/%d] %.2f%%" $(COMPILED_SRCS) $(NUM_SRCS) "$$percentage"; \
+#							sleep $(SLEEP_TIME); \
+#						done; \
+#						if [ $(COMPILED_SRCS) -eq $(NUM_SRCS) ]; then \
+#							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$(COMPILED_SRCS)/$(NUM_SRCS)]" "[✓]$(DEF_COLOR)\n"; \
+#						fi
+#endef
+
+#TITLE ASCII ART - SLANT
+define	DISPLAY_TITLE
+						@echo "$(RED)        ____  __  _______ __  __            ______       _____    ____ "
+						@echo "$(ORANGE)       / __ \\/ / / / ___// / / /           / ___/ |     / /   |  / __ \\"
+						@echo "$(YELLOW)      / /_/ / / / /\\__ \\/ /_/ /            \\\\__ \\| | /| / / /| | / /_/ /"
+						@echo "$(GREEN)     / ____/ /_/ /___/ / __  /            ___/ /| |/ |/ / ___ |/ ____/ "
+						@echo "$(BLUE)    /_/    \\____//____/_/ /_/   ______   /____/ |__/|__/_/  |_/_/      "
+						@echo "$(PURPLE)                               /_____/                                 $(DEF_COLOR)"
+endef

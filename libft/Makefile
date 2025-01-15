@@ -79,15 +79,14 @@ LIBFT_INC			=	include/
 all:					$(NAME)
 
 $(NAME):				$(OBJ)
-							@echo "$(YELLOW)[$(NAME)]:$(DEF_COLOR)"
 							@$(AR) $@ $^
-							@echo "$(GREEN)=> Success!\n$(DEF_COLOR)"
 
 $(OBJ_DIR):
 							@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: 			$(SRC_DIR)%.c $(HEADERS) | $(OBJ_DIR)
 							@$(CC) $(CFLAGS) -I$(LIBFT_INC) -c $< -o $@
+							$(call PROGRESS_BAR_PERCENTAGE)
 
 ########################################################################################################################
 #                                                      TARGETS                                                         #
@@ -117,3 +116,25 @@ BLUE				=	\033[0;94m
 MAGENTA				=	\033[0;95m
 CYAN				=	\033[0;96m
 WHITE				=	\033[0;97m
+
+########################################################################################################################
+#                                                       DISPLAY                                                        #
+########################################################################################################################
+
+SPACEMENT			= -40
+COMPILED_SRCS		=	0
+NUM_SRCS			=	$(words	$(SRC_FILES))
+FRAMES				=	⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
+SLEEP_FRAME			=	0.001
+
+define PROGRESS_BAR_PERCENTAGE
+						$(eval COMPILED_SRCS := $(shell expr $(COMPILED_SRCS) + 1))
+						@percentage=$$(echo "scale=2; $(COMPILED_SRCS) * 100 / $(NUM_SRCS)" | bc); \
+						for frame in $(FRAMES); do \
+							printf "\r$$frame Compiling... [%d/%d] %.2f%%" $(COMPILED_SRCS) $(NUM_SRCS) "$$percentage"; \
+							sleep $(SLEEP_FRAME); \
+						done; \
+						if [ $(COMPILED_SRCS) -eq $(NUM_SRCS) ]; then \
+							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$(COMPILED_SRCS)/$(NUM_SRCS)]" "$(GREEN)[✓]$(DEF_COLOR)\n"; \
+						fi
+endef

@@ -12,29 +12,29 @@
 
 #include "./push_swap.h"
 
-void	sort_three(t_stack **pile_a)
+void	sort_three(t_stack **stack_a)
 {
 	int	one;
 	int	two;
 	int	three;
 
-	one = (*pile_a)->value;
-	two = (*pile_a)->next->value;
-	three = (*pile_a)->prev->value;
+	one = (*stack_a)->value;
+	two = (*stack_a)->next->value;
+	three = (*stack_a)->prev->value;
 	if ((one < two) && (two > three) && (one < three))
 	{
-		ft_rra(pile_a);
-		ft_sa(pile_a);
+		ft_rra(stack_a);
+		ft_sa(stack_a);
 	}
 	else if ((one < two) && (two > three) && (one > three))
-		ft_rra(pile_a);
+		ft_rra(stack_a);
 	else if ((one > two) && (two < three) && (one > three))
-		ft_ra(pile_a);
+		ft_ra(stack_a);
 	else if ((one > two) && (two > three))
 	{
-		ft_sa(pile_a);
-		ft_rra(pile_a);
+		ft_sa(stack_a);
+		ft_rra(stack_a);
 	}
 	else
-		ft_sa(pile_a);
+		ft_sa(stack_a);
 }

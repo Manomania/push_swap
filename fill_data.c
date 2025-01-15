@@ -52,9 +52,7 @@ void	fill_data(t_data **data, int size, t_stack *stack)
 		(*data)->q1 = (*data)->med / 2;
 	(*data)->q2 = (*data)->med + (*data)->q1;
 	if (size > 5)
-	{
 		size_five(stack, data);
-	}
 	else
 	{
 		(*data)->q1 = 0;
