@@ -2,6 +2,7 @@
 #                                                      VARIABLES                                                       #
 ########################################################################################################################\
 
+AUTHOR				=	maximart
 NAME				=	push_swap
 HEADER				=	$(INC_DIR)push_swap.h
 CC 					= 	gcc
@@ -52,7 +53,6 @@ LIBFT				=	$(LIBFT_DIR)libft.a
 all:					.print_header $(LIBFT) $(NAME)
 
 clean:					.print_header
-							@printf "\n"
 							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(OBJ_DIR)]:" "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@rm -rf $(OBJ_DIR)
 							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
@@ -69,12 +69,15 @@ fclean: 				clean
 							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(LIBFT)]:"  "$(GREEN)[✓]$(DEF_COLOR)\n"
 							@$(MAKE) --silent -C $(LIBFT_DIR) fclean
 							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
-							@printf "\n"
+							$(call SEPARATOR)
 
 re: 					.print_header fclean $(LIBFT) $(NAME)
 
 .print_header:
 							$(call DISPLAY_TITLE)
+							$(call SEPARATOR)
+							$(call BUILD)
+							$(call SEPARATOR)
 
 .PHONY: 				all bonus clean fclean re .print_header
 
@@ -93,7 +96,7 @@ $(NAME):				$(LIBFT) $(OBJ)
 								done; \
 							done; \
 							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$$NUM_TOTAL/$$NUM_TOTAL]" "[✓]$(DEF_COLOR)\n"
-							@printf "\n"
+							$(call SEPARATOR)
 
 
 $(LIBFT):
@@ -150,4 +153,18 @@ define	DISPLAY_TITLE
 						@echo "$(GREEN)     / ____/ /_/ /___/ / __  /            ___/ /| |/ |/ / ___ |/ ____/ "
 						@echo "$(BLUE)    /_/    \\____//____/_/ /_/   ______   /____/ |__/|__/_/  |_/_/      "
 						@echo "$(PURPLE)                               /_____/                                 $(DEF_COLOR)"
+						@printf "\n"
+endef
+
+define	SEPARATOR
+						@printf "\n"
+						@echo "$(ORANGE)--------------------------------------------------------------------------$(DEF_COLOR)";
+						@printf "\n"
+endef
+
+define	BUILD
+						@printf "%-47b%b" "$(GREEN)AUTHOR:$(DEF_COLOR)" "$(AUTHOR)\n";
+						@printf "%-47b%b" "$(GREEN)NAME:$(DEF_COLOR)" "$(NAME)\n";
+						@printf "%-47b%b" "$(GREEN)CC:$(DEF_COLOR)" "$(CC)\n";
+						@printf "%-47b%b" "$(GREEN)FLAGS:$(DEF_COLOR)" "$(CFLAGS)\n";
 endef
