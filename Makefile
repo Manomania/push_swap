@@ -6,7 +6,7 @@ AUTHOR				=	maximart
 NAME				=	push_swap
 HEADER				=	$(INC_DIR)push_swap.h
 CC 					= 	cc
-CFLAGS 				= 	-Wall -Wextra -Werror -g3
+CFLAGS 				= 	-Wall -Wextra -Werror
 AR					=	ar rcs
 RM					=	rm -f
 

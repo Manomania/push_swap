@@ -16,6 +16,8 @@ static char	*normalize(char *str)
 {
 	if (str[0] == '+')
 		return (str + 1);
+	if (str[0] == '-' && str[1] == '0')
+		return (str + 1);
 	return (str);
 }
 
@@ -89,6 +91,8 @@ long	ft_atol(const char *str)
 	}
 	return (result * sign);
 }
+
+
 
 int	check_int_min_max(int argc, char **argv)
 {
