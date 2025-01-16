@@ -5,7 +5,7 @@
 AUTHOR				=	maximart
 NAME				=	push_swap
 HEADER				=	$(INC_DIR)push_swap.h
-CC 					= 	gcc
+CC 					= 	cc
 CFLAGS 				= 	-Wall -Wextra -Werror -g3
 AR					=	ar rcs
 RM					=	rm -f
@@ -79,7 +79,7 @@ re: 					.print_header fclean $(LIBFT) $(NAME)
 							$(call BUILD)
 							$(call SEPARATOR)
 
-.PHONY: 				all bonus clean fclean re .print_header
+.PHONY: 				all clean fclean re
 
 ########################################################################################################################
 #                                                       COMMANDS                                                       #
