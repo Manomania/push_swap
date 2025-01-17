@@ -92,8 +92,6 @@ long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-
-
 int	check_int_min_max(int argc, char **argv)
 {
 	int		i;
