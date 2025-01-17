@@ -71,6 +71,9 @@ fclean: 				clean
 							@printf "$(RED)=> Deleted!$(DEF_COLOR)\n"
 							$(call SEPARATOR)
 
+make_libft:
+							@$(MAKE) --silent -C $(LIBFT_DIR)
+
 re: 					.print_header fclean $(LIBFT) $(NAME)
 
 .print_header:
@@ -79,34 +82,22 @@ re: 					.print_header fclean $(LIBFT) $(NAME)
 							$(call BUILD)
 							$(call SEPARATOR)
 
-.PHONY: 				all clean fclean re
+.PHONY: 				all clean fclean make_libft re
 
 ########################################################################################################################
 #                                                       COMMANDS                                                       #
 ########################################################################################################################
 
 $(NAME):				$(LIBFT) $(OBJ)
-							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(NAME)]:$(DEF_COLOR)\n"
 							@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
-							@NUM_TOTAL=$$(echo "$(words $(SRC))"); \
-							for i in $$(seq 1 $$NUM_TOTAL); do \
-								for frame in $(FRAMES); do \
-									printf "\r$$frame Linking... [$$i/$$NUM_TOTAL]"; \
-									sleep $(SLEEP_TIME); \
-								done; \
-							done; \
-							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$$NUM_TOTAL/$$NUM_TOTAL]" "[✓]$(DEF_COLOR)\n"
-							$(call SEPARATOR)
 
-
-$(LIBFT):
-							@printf "%$(SPACEMENT)b%b" "$(BLUE)[$(LIBFT)]:$(DEF_COLOR)\n"
-							@$(MAKE) --silent -C $(LIBFT_DIR)
-							@printf "\n"
+$(LIBFT):				make_libft
 
 $(OBJ_DIR)%.o: 			$(SRC_DIR)%.c $(HEADER)
 							@mkdir -p $(OBJ_DIR)
 							@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR)$(INC_DIR) -c $< -o $@
+							$(call PROGRESS_BAR_PERCENTAGE)
+							$(if $(filter $(COMPILED_SRCS),$(SRCS_TO_COMPILE)),$(call SEPARATOR))
 
 ########################################################################################################################
 #                                                       COLOURS                                                        #
@@ -129,21 +120,28 @@ WHITE				=	\033[0;97m
 
 SPACEMENT			=	-40
 COMPILED_SRCS		=	0
-NUM_SRCS			=	$(words	$(SRC))
 FRAMES				=	⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
-SLEEP_TIME			=	0.001
+SLEEP_FRAME			=	0.001
 
-#define PROGRESS_BAR_PERCENTAGE
-#						$(eval COMPILED_SRCS := $(shell expr $(COMPILED_SRCS) + 1))
-#						@percentage=$$(echo "scale=2; $(COMPILED_SRCS) * 100 / $(NUM_SRCS)" | bc); \
-#						for frame in $(FRAMES); do \
-#							printf "\r$$frame Compiling... [%d/%d] %.2f%%" $(COMPILED_SRCS) $(NUM_SRCS) "$$percentage"; \
-#							sleep $(SLEEP_TIME); \
-#						done; \
-#						if [ $(COMPILED_SRCS) -eq $(NUM_SRCS) ]; then \
-#							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$(COMPILED_SRCS)/$(NUM_SRCS)]" "[✓]$(DEF_COLOR)\n"; \
-#						fi
-#endef
+SRCS_TO_COMPILE		=	$(shell find -maxdepth 1 -newer $(NAME) -name '*.c' 2>/dev/null | wc -l)
+ifeq ($(SRCS_TO_COMPILE),0)
+	SRCS_TO_COMPILE =	$(words $(SRC_F))
+endif
+
+define PROGRESS_BAR_PERCENTAGE
+						$(eval COMPILED_SRCS := $(shell expr $(COMPILED_SRCS) + 1))
+						@if [ $(COMPILED_SRCS) -eq 1 ]; then \
+							printf "$(BLUE)[$(NAME)]:$(DEF_COLOR)\n"; \
+						fi
+						@percentage=$$(echo "scale=0; $(COMPILED_SRCS) * 100 / $(SRCS_TO_COMPILE)" | bc); \
+						for frame in $(FRAMES); do \
+							printf "\r$$frame Compiling... [%d/%d] %d%%" $(COMPILED_SRCS) $(SRCS_TO_COMPILE) $$percentage; \
+							sleep $(SLEEP_FRAME); \
+						done; \
+						if [ $(COMPILED_SRCS) -eq $(SRCS_TO_COMPILE) ]; then \
+							printf "%-42b%b" "\r$(GREEN)Compilation finished [$(COMPILED_SRCS)/$(SRCS_TO_COMPILE)]" "$(GREEN)[✓]$(DEF_COLOR)\n"; \
+						fi
+endef
 
 #TITLE ASCII ART - SLANT
 define	DISPLAY_TITLE

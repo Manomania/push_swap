@@ -123,18 +123,25 @@ WHITE				=	\033[0;97m
 
 SPACEMENT			= -40
 COMPILED_SRCS		=	0
-NUM_SRCS			=	$(words	$(SRC_FILES))
 FRAMES				=	⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
 SLEEP_FRAME			=	0.001
 
+SRCS_TO_COMPILE		=	$(shell find $(SRC_DIR) -newer $(NAME) -name '*.c' 2>/dev/null | wc -l)
+ifeq ($(SRCS_TO_COMPILE),0)
+						SRCS_TO_COMPILE =   $(words $(SRC_FILES))
+endif
+
 define PROGRESS_BAR_PERCENTAGE
 						$(eval COMPILED_SRCS := $(shell expr $(COMPILED_SRCS) + 1))
-						@percentage=$$(echo "scale=2; $(COMPILED_SRCS) * 100 / $(NUM_SRCS)" | bc); \
+						if [ $(COMPILED_SRCS) -eq 1 ]; then \
+							printf "$(BLUE)[$(NAME)]:$(DEF_COLOR)\n"; \
+						fi
+						@percentage=$$(echo "scale=2; $(COMPILED_SRCS) * 100 / $(SRCS_TO_COMPILE)" | bc); \
 						for frame in $(FRAMES); do \
-							printf "\r$$frame Compiling... [%d/%d] %.2f%%" $(COMPILED_SRCS) $(NUM_SRCS) "$$percentage"; \
+							printf "\r$$frame Compiling... [%d/%d] %.2f%%" $(COMPILED_SRCS) $(SRCS_TO_COMPILE) "$$percentage"; \
 							sleep $(SLEEP_FRAME); \
 						done; \
-						if [ $(COMPILED_SRCS) -eq $(NUM_SRCS) ]; then \
-							printf "%-42b%b" "\r$(GREEN)Compilation terminée [$(COMPILED_SRCS)/$(NUM_SRCS)]" "$(GREEN)[✓]$(DEF_COLOR)\n"; \
+						if [ $(COMPILED_SRCS) -eq $(SRCS_TO_COMPILE) ]; then \
+							printf "%-42b%b" "\r$(GREEN)Compilation finsihed [$(COMPILED_SRCS)/$(SRCS_TO_COMPILE)]" "$(GREEN)[✓]$(DEF_COLOR)\n\n"; \
 						fi
 endef
